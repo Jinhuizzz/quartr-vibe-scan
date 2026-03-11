@@ -13,8 +13,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 pointer-events-none" />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12">
+      {/* Main content — pointer-events-none so canvas receives mouse, auto on interactive elements */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12 pointer-events-none">
         {/* Top — Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
