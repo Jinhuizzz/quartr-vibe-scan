@@ -5,69 +5,85 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Brain background — positioned right/center, bleeding off edge */}
       <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt=""
-          className="w-full h-full object-cover opacity-70"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+        <div className="absolute top-0 right-0 w-[70%] h-full">
+          <img
+            src={heroBg}
+            alt=""
+            className="w-full h-full object-cover object-center opacity-50"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
       </div>
 
-      {/* Content — centered */}
-      <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 text-center">
+      {/* Main content */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12">
+        {/* Top — Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="flex items-center gap-4"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none mb-6">
-            Gain after
-            <br />
-            <span className="text-gradient">Gain</span>
-          </h1>
+          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-text-dim text-xs uppercase tracking-[0.3em] font-mono">
+            AI-Powered Research Platform
+          </span>
         </motion.div>
 
+        {/* Center — Hero title, massive and asymmetric */}
+        <div className="flex-1 flex items-center">
+          <div className="w-full">
+            <motion.h1
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
+              className="font-display font-bold tracking-[-0.04em] leading-[0.9]"
+            >
+              <span className="block text-[clamp(3.5rem,12vw,11rem)] text-foreground">
+                Gain
+              </span>
+              <span className="block text-[clamp(3.5rem,12vw,11rem)] outline-text ml-[5vw]">
+                after
+              </span>
+              <span className="block text-[clamp(3.5rem,12vw,11rem)] text-gradient ml-[10vw]">
+                Gain
+              </span>
+            </motion.h1>
+          </div>
+        </div>
+
+        {/* Bottom — Split: description left, CTA right */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col items-center gap-6"
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8"
         >
-          <p className="text-text-secondary text-lg md:text-xl leading-relaxed max-w-lg">
+          <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-sm">
             The proactive AI Agent powered by WatchWise Data Brain.
-            Research faster, understand deeper, and trust every finding.
+            Research faster. Understand deeper. Trust every finding.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex items-center gap-3">
             <Link
               to="/research"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-colors"
+              className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-all"
             >
               Get Report
-              <ArrowRight size={16} />
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               to="/mira"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-foreground font-medium text-sm hover:bg-surface-elevated transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-border/80 text-foreground font-medium text-sm hover:border-primary/50 hover:bg-surface-elevated transition-all"
             >
               Ask MIRA
             </Link>
           </div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-text-dim text-xs uppercase tracking-widest">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-text-dim to-transparent" />
-      </motion.div>
     </section>
   );
 };
