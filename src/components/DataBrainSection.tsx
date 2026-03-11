@@ -33,7 +33,7 @@ const DataBrainSection = () => {
               {/* Content */}
               <div className="p-5 font-mono text-xs leading-relaxed space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-green-400">●</span>
+                  <span className="text-primary">●</span>
                   <span className="text-text-dim">LIVE</span>
                   <span className="text-text-secondary">Learning Session</span>
                 </div>
