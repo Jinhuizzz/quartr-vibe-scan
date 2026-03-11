@@ -207,7 +207,7 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `hsla(${glowHsl}, ${alpha})`;
+            ctx.strokeStyle = glowColor(alpha);
             ctx.lineWidth = 0.7;
             ctx.stroke();
           }
@@ -226,20 +226,20 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
         // Always-on ambient glow
         ctx.beginPath();
         ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${glowHsl}, 0.06)`;
+        ctx.fillStyle = glowColor(0.06);
         ctx.fill();
 
         // Extra glow near mouse
         if (proximity > 0.1) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, size * 5, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${glowHsl}, ${proximity * 0.15})`;
+          ctx.fillStyle = glowColor(proximity * 0.15);
           ctx.fill();
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${glowHsl}, ${alpha})`;
+        ctx.fillStyle = glowColor(alpha);
         ctx.fill();
       }
 
