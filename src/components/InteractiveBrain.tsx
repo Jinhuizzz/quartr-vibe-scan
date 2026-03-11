@@ -151,6 +151,8 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
 
     const rootStyle = getComputedStyle(document.documentElement);
     const primaryHsl = rootStyle.getPropertyValue("--primary").trim();
+    // Brighter variant for visibility against dark bg
+    const glowHsl = rootStyle.getPropertyValue("--glow").trim() || "215 80% 60%";
 
     const animate = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
