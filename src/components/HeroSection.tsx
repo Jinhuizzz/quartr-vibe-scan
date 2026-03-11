@@ -9,11 +9,9 @@ const HeroSection = () => {
       {/* Interactive brain canvas — full screen, centered */}
       <div className="absolute inset-0">
         <InteractiveBrain />
-        {/* Softer overlay so brain is clearly visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-transparent to-background/35 pointer-events-none" />
       </div>
 
-      {/* Text layers — interweaved with brain at different positions */}
+      {/* Text layers fused with brain */}
       <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12 pointer-events-none">
         {/* Top — Eyebrow */}
         <motion.div
@@ -28,37 +26,86 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        {/* Center — "Gain after Gain" at different layers */}
+        {/* Center — "Gain after Gain" wrapping around the brain */}
         <div className="flex-1 flex items-center justify-center relative">
-          {/* "Gain" — top-left, behind brain visually */}
+          {/* Back layer "GAIN" — large, behind brain, top-left */}
           <motion.span
-            initial={{ opacity: 0, x: -80 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.1, ease: [0.25, 0.1, 0, 1] }}
-            className="absolute top-[10%] left-[5%] md:left-[8%] font-display font-bold tracking-[-0.04em] leading-none text-[clamp(3rem,10vw,9rem)] text-foreground/90 mix-blend-screen"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.4, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
+            className="absolute z-0 select-none"
+            style={{
+              top: "8%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              fontSize: "clamp(4rem, 14vw, 13rem)",
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.85,
+              WebkitTextStroke: "1.5px hsl(var(--foreground) / 0.15)",
+              color: "transparent",
+            }}
           >
-            Gain
+            GAIN
           </motion.span>
 
-          {/* "after" — center, overlapping with brain */}
+          {/* "after" — small, sits at brain center, overlapping */}
           <motion.span
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0, 1] }}
-            className="absolute top-[38%] left-[50%] -translate-x-1/2 font-display font-bold tracking-[-0.04em] leading-none text-[clamp(2.5rem,8vw,7rem)] outline-text opacity-60"
+            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0, 1] }}
+            className="absolute z-30 select-none"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              fontSize: "clamp(0.9rem, 2vw, 1.6rem)",
+              fontFamily: "var(--font-display)",
+              fontWeight: 400,
+              letterSpacing: "0.35em",
+              textTransform: "uppercase",
+              color: "hsl(var(--foreground) / 0.5)",
+            }}
           >
             after
           </motion.span>
 
-          {/* "Gain" — bottom-right, in front with gradient */}
+          {/* Front layer "GAIN" — bold, in front of brain, bottom */}
           <motion.span
-            initial={{ opacity: 0, x: 80 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
-            className="absolute bottom-[15%] right-[5%] md:right-[10%] font-display font-bold tracking-[-0.04em] leading-none text-[clamp(3rem,10vw,9rem)] text-gradient z-20"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.4, delay: 0.5, ease: [0.25, 0.1, 0, 1] }}
+            className="absolute z-20 select-none text-gradient"
+            style={{
+              bottom: "8%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              fontSize: "clamp(4rem, 14vw, 13rem)",
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.85,
+            }}
           >
-            Gain
+            GAIN
           </motion.span>
+
+          {/* Subtle glow ring behind the brain to tie text + model together */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, delay: 0.3 }}
+            className="absolute z-[1] rounded-full pointer-events-none"
+            style={{
+              width: "min(55vw, 500px)",
+              height: "min(55vw, 500px)",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              background: "radial-gradient(circle, hsl(var(--glow) / 0.08) 0%, transparent 70%)",
+            }}
+          />
         </div>
 
         {/* Bottom — Description and CTAs */}
