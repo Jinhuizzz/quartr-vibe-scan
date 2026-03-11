@@ -61,7 +61,7 @@ const HeroSection = () => {
             The proactive AI Agent powered by WatchWise Data Brain.
             Research faster. Understand deeper. Trust every finding.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 pointer-events-auto">
             <Link
               to="/research"
               className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-all"
