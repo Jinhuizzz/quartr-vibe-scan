@@ -6,14 +6,14 @@ import InteractiveBrain from "@/components/InteractiveBrain";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Interactive brain canvas — right side */}
-      <div className="absolute top-0 right-0 w-[75%] h-full">
+      {/* Interactive brain canvas — full screen, centered */}
+      <div className="absolute inset-0">
         <InteractiveBrain />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 pointer-events-none" />
+        {/* Softer overlay so brain is clearly visible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60 pointer-events-none" />
       </div>
 
-      {/* Main content — pointer-events-none so canvas receives mouse, auto on interactive elements */}
+      {/* Text layers — interweaved with brain at different positions */}
       <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12 pointer-events-none">
         {/* Top — Eyebrow */}
         <motion.div
@@ -28,33 +28,44 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        {/* Center — Hero title */}
-        <div className="flex-1 flex items-center">
-          <div className="w-full">
-            <motion.h1
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
-              className="font-display font-bold tracking-[-0.04em] leading-[0.9]"
-            >
-              <span className="block text-[clamp(3.5rem,12vw,11rem)] text-foreground">
-                Gain
-              </span>
-              <span className="block text-[clamp(3.5rem,12vw,11rem)] outline-text ml-[5vw]">
-                after
-              </span>
-              <span className="block text-[clamp(3.5rem,12vw,11rem)] text-gradient ml-[10vw]">
-                Gain
-              </span>
-            </motion.h1>
-          </div>
+        {/* Center — "Gain after Gain" at different layers */}
+        <div className="flex-1 flex items-center justify-center relative">
+          {/* "Gain" — top-left, behind brain visually */}
+          <motion.span
+            initial={{ opacity: 0, x: -80 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, delay: 0.1, ease: [0.25, 0.1, 0, 1] }}
+            className="absolute top-[10%] left-[5%] md:left-[8%] font-display font-bold tracking-[-0.04em] leading-none text-[clamp(3rem,10vw,9rem)] text-foreground/90 mix-blend-screen"
+          >
+            Gain
+          </motion.span>
+
+          {/* "after" — center, overlapping with brain */}
+          <motion.span
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0, 1] }}
+            className="absolute top-[38%] left-[50%] -translate-x-1/2 font-display font-bold tracking-[-0.04em] leading-none text-[clamp(2.5rem,8vw,7rem)] outline-text opacity-60"
+          >
+            after
+          </motion.span>
+
+          {/* "Gain" — bottom-right, in front with gradient */}
+          <motion.span
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
+            className="absolute bottom-[15%] right-[5%] md:right-[10%] font-display font-bold tracking-[-0.04em] leading-none text-[clamp(3rem,10vw,9rem)] text-gradient z-20"
+          >
+            Gain
+          </motion.span>
         </div>
 
-        {/* Bottom — Split */}
+        {/* Bottom — Description and CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8"
         >
           <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-sm">

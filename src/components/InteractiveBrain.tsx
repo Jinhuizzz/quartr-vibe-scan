@@ -22,78 +22,85 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
     const particles: Particle[] = [];
     const centerX = width * 0.5;
     const centerY = height * 0.45;
-    const brainScale = Math.min(width, height) * 0.35;
+    const brainScale = Math.min(width, height) * 0.42;
 
-    // Brain outline points using parametric curves
     const brainPoints: [number, number][] = [];
 
-    // Left hemisphere
-    for (let t = 0; t < Math.PI * 2; t += 0.08) {
-      // Main brain shape — two overlapping ellipses
-      const lx = Math.cos(t) * 0.9 - 0.15;
-      const ly = Math.sin(t) * 1.1;
-      brainPoints.push([centerX + lx * brainScale * 0.5, centerY + ly * brainScale * 0.45]);
+    // Left hemisphere — denser outline
+    for (let t = 0; t < Math.PI * 2; t += 0.05) {
+      const lx = Math.cos(t) * 0.92 - 0.14;
+      const ly = Math.sin(t) * 1.12;
+      brainPoints.push([centerX + lx * brainScale * 0.52, centerY + ly * brainScale * 0.46]);
     }
 
-    // Right hemisphere (slightly offset)
-    for (let t = 0; t < Math.PI * 2; t += 0.08) {
-      const rx = Math.cos(t) * 0.9 + 0.15;
-      const ry = Math.sin(t) * 1.1;
-      brainPoints.push([centerX + rx * brainScale * 0.5, centerY + ry * brainScale * 0.45]);
+    // Right hemisphere
+    for (let t = 0; t < Math.PI * 2; t += 0.05) {
+      const rx = Math.cos(t) * 0.92 + 0.14;
+      const ry = Math.sin(t) * 1.12;
+      brainPoints.push([centerX + rx * brainScale * 0.52, centerY + ry * brainScale * 0.46]);
     }
 
-    // Internal structure — folds/gyri
-    for (let i = 0; i < 5; i++) {
-      const yOffset = -0.8 + i * 0.4;
-      for (let t = -0.7; t < 0.7; t += 0.1) {
-        const wave = Math.sin(t * 4 + i) * 0.08;
+    // Internal folds — more detail
+    for (let i = 0; i < 7; i++) {
+      const yOffset = -0.9 + i * 0.3;
+      for (let t = -0.8; t < 0.8; t += 0.06) {
+        const wave = Math.sin(t * 5 + i * 1.2) * 0.1;
         brainPoints.push([
-          centerX + t * brainScale * 0.45,
-          centerY + (yOffset + wave) * brainScale * 0.4,
+          centerX + t * brainScale * 0.48,
+          centerY + (yOffset + wave) * brainScale * 0.42,
         ]);
       }
     }
 
-    // Brain stem
-    for (let t = 0; t < 6; t++) {
+    // Vertical central fissure
+    for (let t = -0.9; t < 0.7; t += 0.06) {
       brainPoints.push([
-        centerX + (Math.random() - 0.5) * brainScale * 0.08,
-        centerY + brainScale * 0.45 + t * brainScale * 0.04,
+        centerX + (Math.sin(t * 3) * 0.02) * brainScale,
+        centerY + t * brainScale * 0.42,
       ]);
     }
 
-    // Fill interior with scattered particles
-    for (let i = 0; i < 120; i++) {
+    // Brain stem
+    for (let t = 0; t < 10; t++) {
+      brainPoints.push([
+        centerX + (Math.random() - 0.5) * brainScale * 0.1,
+        centerY + brainScale * 0.46 + t * brainScale * 0.035,
+      ]);
+    }
+
+    // Dense interior fill
+    for (let i = 0; i < 250; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const r = Math.random() * 0.85;
-      const px = centerX + Math.cos(angle) * r * brainScale * 0.42;
-      const py = centerY + Math.sin(angle) * r * brainScale * 0.38;
+      const r = Math.pow(Math.random(), 0.6) * 0.88;
+      const hemiOffset = (Math.random() > 0.5 ? 1 : -1) * 0.05;
+      const px = centerX + (Math.cos(angle) * r * 0.48 + hemiOffset) * brainScale;
+      const py = centerY + Math.sin(angle) * r * 0.42 * brainScale;
       brainPoints.push([px, py]);
     }
 
-    // Create particles from points
+    // Create particles
     brainPoints.forEach(([px, py]) => {
       particles.push({
-        x: px + (Math.random() - 0.5) * 4,
-        y: py + (Math.random() - 0.5) * 4,
+        x: px + (Math.random() - 0.5) * 3,
+        y: py + (Math.random() - 0.5) * 3,
         originX: px,
         originY: py,
         vx: 0,
         vy: 0,
-        size: 1 + Math.random() * 2,
-        alpha: 0.3 + Math.random() * 0.7,
+        size: 1 + Math.random() * 2.5,
+        alpha: 0.4 + Math.random() * 0.6,
         connections: [],
       });
     });
 
-    // Precompute connections (nearby particles)
-    const connectionDist = brainScale * 0.18;
+    // Precompute connections
+    const connectionDist = brainScale * 0.14;
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].originX - particles[j].originX;
         const dy = particles[i].originY - particles[j].originY;
         if (dx * dx + dy * dy < connectionDist * connectionDist) {
-          if (particles[i].connections.length < 4) {
+          if (particles[i].connections.length < 5) {
             particles[i].connections.push(j);
           }
         }
@@ -142,9 +149,8 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
 
     let time = 0;
 
-    // Read CSS custom property for brand color
     const rootStyle = getComputedStyle(document.documentElement);
-    const primaryHsl = rootStyle.getPropertyValue('--primary').trim(); // "215 60% 55%"
+    const primaryHsl = rootStyle.getPropertyValue("--primary").trim();
 
     const animate = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
@@ -156,32 +162,28 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
 
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
-      const mouseRadius = 120;
-      time += 0.01;
+      const mouseRadius = 140;
+      time += 0.008;
 
-      // Update particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Mouse repulsion
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < mouseRadius && dist > 0) {
           const force = (mouseRadius - dist) / mouseRadius;
-          p.vx += (dx / dist) * force * 2;
-          p.vy += (dy / dist) * force * 2;
+          p.vx += (dx / dist) * force * 2.5;
+          p.vy += (dy / dist) * force * 2.5;
         }
 
-        // Spring back to origin with gentle float
-        const floatX = Math.sin(time + i * 0.1) * 1.5;
-        const floatY = Math.cos(time * 0.8 + i * 0.15) * 1.5;
+        const floatX = Math.sin(time + i * 0.1) * 1.2;
+        const floatY = Math.cos(time * 0.7 + i * 0.15) * 1.2;
 
         p.vx += (p.originX + floatX - p.x) * 0.04;
         p.vy += (p.originY + floatY - p.y) * 0.04;
 
-        // Damping
         p.vx *= 0.9;
         p.vy *= 0.9;
 
@@ -197,14 +199,14 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
           const dx = p.x - q.x;
           const dy = p.y - q.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = 80;
+          const maxDist = 70;
           if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.15;
+            const alpha = (1 - dist / maxDist) * 0.2;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
             ctx.strokeStyle = `hsla(${primaryHsl}, ${alpha})`;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
@@ -212,19 +214,17 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
 
       // Draw particles
       for (const p of particles) {
-        // Proximity to mouse = brighter
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const proximity = Math.max(0, 1 - dist / 200);
-        const alpha = p.alpha * 0.5 + proximity * 0.5;
-        const size = p.size + proximity * 1.5;
+        const proximity = Math.max(0, 1 - dist / 220);
+        const alpha = p.alpha * 0.6 + proximity * 0.4;
+        const size = p.size + proximity * 2;
 
-        // Glow
-        if (proximity > 0.2) {
+        if (proximity > 0.15) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${primaryHsl}, ${proximity * 0.08})`;
+          ctx.arc(p.x, p.y, size * 4, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${primaryHsl}, ${proximity * 0.1})`;
           ctx.fill();
         }
 
