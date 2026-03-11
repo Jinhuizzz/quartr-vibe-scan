@@ -203,12 +203,12 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           const maxDist = 70;
           if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.2;
+            const alpha = (1 - dist / maxDist) * 0.45;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `hsla(${primaryHsl}, ${alpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `hsla(${glowHsl}, ${alpha})`;
+            ctx.lineWidth = 0.7;
             ctx.stroke();
           }
         }
@@ -220,19 +220,20 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const proximity = Math.max(0, 1 - dist / 220);
-        const alpha = p.alpha * 0.6 + proximity * 0.4;
+        const alpha = p.alpha * 0.8 + proximity * 0.2;
         const size = p.size + proximity * 2;
 
-        if (proximity > 0.15) {
+        // Glow
+        if (proximity > 0.1) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 4, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${primaryHsl}, ${proximity * 0.1})`;
+          ctx.arc(p.x, p.y, size * 5, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${glowHsl}, ${proximity * 0.15})`;
           ctx.fill();
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${primaryHsl}, ${alpha})`;
+        ctx.fillStyle = `hsla(${glowHsl}, ${alpha})`;
         ctx.fill();
       }
 
