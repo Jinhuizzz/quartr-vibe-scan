@@ -150,9 +150,9 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
     let time = 0;
 
     const rootStyle = getComputedStyle(document.documentElement);
-    const primaryHsl = rootStyle.getPropertyValue("--primary").trim();
-    // Brighter variant for visibility against dark bg
-    const glowHsl = rootStyle.getPropertyValue("--glow").trim() || "215 80% 60%";
+    const glowHslRaw = rootStyle.getPropertyValue("--glow").trim() || "215 80% 60%";
+    const [glowH = "215", glowS = "80%", glowL = "60%"] = glowHslRaw.split(/\s+/);
+    const glowColor = (alpha: number) => `hsla(${glowH}, ${glowS}, ${glowL}, ${Math.min(1, Math.max(0, alpha))})`;
 
     const animate = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();

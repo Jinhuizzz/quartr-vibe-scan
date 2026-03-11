@@ -10,7 +10,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <InteractiveBrain />
         {/* Softer overlay so brain is clearly visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-transparent to-background/35 pointer-events-none" />
       </div>
 
       {/* Text layers — interweaved with brain at different positions */}
