@@ -1,22 +1,16 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import InteractiveBrain from "@/components/InteractiveBrain";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Brain background — positioned right/center, bleeding off edge */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[70%] h-full">
-          <img
-            src={heroBg}
-            alt=""
-            className="w-full h-full object-cover object-center opacity-50"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+      {/* Interactive brain canvas — right side */}
+      <div className="absolute top-0 right-0 w-[75%] h-full">
+        <InteractiveBrain />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 pointer-events-none" />
       </div>
 
       {/* Main content */}
@@ -34,7 +28,7 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        {/* Center — Hero title, massive and asymmetric */}
+        {/* Center — Hero title */}
         <div className="flex-1 flex items-center">
           <div className="w-full">
             <motion.h1
@@ -56,7 +50,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Bottom — Split: description left, CTA right */}
+        {/* Bottom — Split */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
