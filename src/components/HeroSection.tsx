@@ -13,8 +13,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 pointer-events-none" />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12">
+      {/* Main content — pointer-events-none so canvas receives mouse, auto on interactive elements */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-between px-6 md:px-12 lg:px-20 pt-28 pb-12 pointer-events-none">
         {/* Top — Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -61,7 +61,7 @@ const HeroSection = () => {
             The proactive AI Agent powered by WatchWise Data Brain.
             Research faster. Understand deeper. Trust every finding.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 pointer-events-auto">
             <Link
               to="/research"
               className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-all"

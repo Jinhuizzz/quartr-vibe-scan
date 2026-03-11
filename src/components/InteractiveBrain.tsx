@@ -142,6 +142,10 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
 
     let time = 0;
 
+    // Read CSS custom property for brand color
+    const rootStyle = getComputedStyle(document.documentElement);
+    const primaryHsl = rootStyle.getPropertyValue('--primary').trim(); // "215 60% 55%"
+
     const animate = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
       if (!rect) return;
@@ -171,8 +175,8 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
         }
 
         // Spring back to origin with gentle float
-        const floatX = Math.sin(time + i * 0.1) * 0.3;
-        const floatY = Math.cos(time * 0.8 + i * 0.15) * 0.3;
+        const floatX = Math.sin(time + i * 0.1) * 1.5;
+        const floatY = Math.cos(time * 0.8 + i * 0.15) * 1.5;
 
         p.vx += (p.originX + floatX - p.x) * 0.04;
         p.vy += (p.originY + floatY - p.y) * 0.04;
@@ -199,7 +203,7 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `hsla(215, 70%, 60%, ${alpha})`;
+            ctx.strokeStyle = `hsla(${primaryHsl}, ${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -220,13 +224,13 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
         if (proximity > 0.2) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(215, 80%, 65%, ${proximity * 0.08})`;
+          ctx.fillStyle = `hsla(${primaryHsl}, ${proximity * 0.08})`;
           ctx.fill();
         }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(215, 70%, 70%, ${alpha})`;
+        ctx.fillStyle = `hsla(${primaryHsl}, ${alpha})`;
         ctx.fill();
       }
 
