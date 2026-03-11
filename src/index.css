@@ -36,14 +36,11 @@
 
     --radius: 0.625rem;
 
-    /* Custom tokens */
     --glow: 215 80% 60%;
     --surface: 220 14% 10%;
     --surface-elevated: 220 14% 13%;
     --text-dim: 215 10% 40%;
     --text-secondary: 215 12% 60%;
-    --gradient-blue: linear-gradient(135deg, hsl(215 80% 60%) 0%, hsl(200 70% 50%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(220 14% 10%) 0%, hsl(220 15% 5%) 100%);
     --nav-bg: 220 14% 8%;
 
     --sidebar-background: 220 14% 6%;
@@ -77,12 +74,21 @@
     background-image: linear-gradient(135deg, hsl(215 80% 65%), hsl(200 70% 55%));
   }
 
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(210 20% 92%), hsl(215 60% 75%));
+  }
+
   .glow-sm {
     box-shadow: 0 0 20px -5px hsl(215 80% 60% / 0.15);
   }
 
   .glow-md {
     box-shadow: 0 0 40px -10px hsl(215 80% 60% / 0.2);
+  }
+
+  .glow-lg {
+    box-shadow: 0 0 80px -20px hsl(215 80% 60% / 0.25);
   }
 
   .nav-glass {
@@ -93,6 +99,16 @@
 
   .surface-card {
     @apply bg-card border border-border/50 rounded-xl;
+  }
+
+  .outline-text {
+    -webkit-text-stroke: 1.5px hsl(var(--foreground));
+    color: transparent;
+  }
+
+  .outline-text-dim {
+    -webkit-text-stroke: 1px hsl(var(--text-dim));
+    color: transparent;
   }
 }
 
@@ -106,10 +122,32 @@
   animation: ticker-scroll 30s linear infinite;
 }
 
+/* Marquee text */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
 /* Subtle grid pattern */
 .bg-grid {
   background-image: 
     linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
     linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
   background-size: 60px 60px;
+}
+
+/* Dot grid */
+.bg-dots {
+  background-image: radial-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
