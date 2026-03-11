@@ -9,8 +9,6 @@ interface Particle {
   vy: number;
   size: number;
   alpha: number;
-  connections: number[];
-  layer: "globe" | "brain"; // which visual layer
 }
 
 const InteractiveBrain = ({ className = "" }: { className?: string }) => {
@@ -18,168 +16,113 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const particlesRef = useRef<Particle[]>([]);
   const animFrameRef = useRef<number>(0);
-  const rotationRef = useRef(0);
 
   const initParticles = useCallback((width: number, height: number) => {
     const particles: Particle[] = [];
     const centerX = width * 0.5;
-    const centerY = height * 0.45;
-    const radius = Math.min(width, height) * 0.32;
+    const centerY = height * 0.4;
+    const scale = Math.min(width, height) * 0.38;
 
-    // === GLOBE WIREFRAME LAYER ===
-    // Latitude lines
-    for (let lat = -3; lat <= 3; lat++) {
-      const phi = (lat / 3) * (Math.PI * 0.45);
-      const r = Math.cos(phi) * radius;
-      const yOff = Math.sin(phi) * radius * 0.95;
-      for (let t = 0; t < Math.PI * 2; t += 0.12) {
-        particles.push({
-          x: 0, y: 0,
-          originX: centerX + Math.cos(t) * r,
-          originY: centerY + yOff,
-          vx: 0, vy: 0,
-          size: 0.8 + Math.random() * 0.5,
-          alpha: 0.12 + Math.abs(lat) * 0.02,
-          connections: [],
-          layer: "globe",
-        });
-      }
-    }
+    // Helper: check if point is roughly inside brain silhouette
+    const inBrain = (nx: number, ny: number): boolean => {
+      // Brain is wider than tall, two hemispheres
+      // Left hemisphere center (-0.15, 0), right (0.15, 0)
+      const lDist = Math.sqrt((nx + 0.13) ** 2 / 0.42 + ny ** 2 / 0.52);
+      const rDist = Math.sqrt((nx - 0.13) ** 2 / 0.42 + ny ** 2 / 0.52);
+      const inHemi = lDist < 1 || rDist < 1;
+      // Brain stem
+      const inStem = Math.abs(nx) < 0.06 && ny > 0.4 && ny < 0.7;
+      return inHemi || inStem;
+    };
 
-    // Longitude lines (meridians)
-    for (let lon = 0; lon < 8; lon++) {
-      const theta = (lon / 8) * Math.PI * 2;
-      for (let t = -Math.PI * 0.48; t < Math.PI * 0.48; t += 0.1) {
-        const r = Math.cos(t) * radius;
-        particles.push({
-          x: 0, y: 0,
-          originX: centerX + Math.cos(theta) * r,
-          originY: centerY + Math.sin(t) * radius * 0.95,
-          vx: 0, vy: 0,
-          size: 0.6 + Math.random() * 0.5,
-          alpha: 0.1 + Math.random() * 0.06,
-          connections: [],
-          layer: "globe",
-        });
-      }
-    }
+    // Dense cloud of particles scattered in brain shape
+    // More particles at edges (outline) and scattered inside
+    const totalParticles = 600;
 
-    // === BRAIN NEURAL LAYER (inside the globe) ===
-    const brainR = radius * 0.85;
+    for (let i = 0; i < totalParticles; i++) {
+      let nx: number, ny: number;
+      let attempts = 0;
 
-    // Left hemisphere outline
-    for (let t = 0; t < Math.PI * 2; t += 0.07) {
-      const lx = Math.cos(t) * 0.85 - 0.12;
-      const ly = Math.sin(t) * 1.05;
-      const px = centerX + lx * brainR * 0.5;
-      const py = centerY + ly * brainR * 0.42;
-      // Only add if inside globe
-      const dx = px - centerX, dy = py - centerY;
-      if (dx * dx + dy * dy < radius * radius) {
-        particles.push({
-          x: 0, y: 0, originX: px, originY: py,
-          vx: 0, vy: 0,
-          size: 1.2 + Math.random() * 1.5,
-          alpha: 0.25 + Math.random() * 0.35,
-          connections: [], layer: "brain",
-        });
-      }
-    }
+      // Random sampling within brain shape
+      do {
+        nx = (Math.random() - 0.5) * 1.6;
+        ny = (Math.random() - 0.5) * 1.6;
+        attempts++;
+      } while (!inBrain(nx, ny) && attempts < 50);
 
-    // Right hemisphere
-    for (let t = 0; t < Math.PI * 2; t += 0.07) {
-      const rx = Math.cos(t) * 0.85 + 0.12;
-      const ry = Math.sin(t) * 1.05;
-      const px = centerX + rx * brainR * 0.5;
-      const py = centerY + ry * brainR * 0.42;
-      const dx = px - centerX, dy = py - centerY;
-      if (dx * dx + dy * dy < radius * radius) {
-        particles.push({
-          x: 0, y: 0, originX: px, originY: py,
-          vx: 0, vy: 0,
-          size: 1.2 + Math.random() * 1.5,
-          alpha: 0.25 + Math.random() * 0.35,
-          connections: [], layer: "brain",
-        });
-      }
-    }
+      if (attempts >= 50) continue;
 
-    // Brain folds / gyri
-    for (let i = 0; i < 6; i++) {
-      const yOffset = -0.8 + i * 0.32;
-      for (let t = -0.7; t < 0.7; t += 0.08) {
-        const wave = Math.sin(t * 5 + i * 1.3) * 0.09;
-        const px = centerX + t * brainR * 0.45;
-        const py = centerY + (yOffset + wave) * brainR * 0.4;
-        const dx = px - centerX, dy = py - centerY;
-        if (dx * dx + dy * dy < radius * radius * 0.85) {
-          particles.push({
-            x: 0, y: 0, originX: px, originY: py,
-            vx: 0, vy: 0,
-            size: 1 + Math.random() * 1.8,
-            alpha: 0.3 + Math.random() * 0.4,
-            connections: [], layer: "brain",
-          });
-        }
-      }
-    }
+      const px = centerX + nx * scale;
+      const py = centerY + ny * scale;
 
-    // Central fissure
-    for (let t = -0.85; t < 0.65; t += 0.08) {
+      // Distance from center determines brightness
+      const distFromCenter = Math.sqrt(nx * nx + ny * ny);
+      const edgeFactor = Math.min(1, distFromCenter / 0.6);
+
       particles.push({
-        x: 0, y: 0,
-        originX: centerX + Math.sin(t * 3) * brainR * 0.015,
-        originY: centerY + t * brainR * 0.4,
-        vx: 0, vy: 0,
-        size: 1 + Math.random(),
-        alpha: 0.2 + Math.random() * 0.3,
-        connections: [], layer: "brain",
+        x: px + (Math.random() - 0.5) * 3,
+        y: py + (Math.random() - 0.5) * 3,
+        originX: px,
+        originY: py,
+        vx: 0,
+        vy: 0,
+        // Smaller particles scattered, larger at edges
+        size: 0.5 + Math.random() * 2 + edgeFactor * 1.5,
+        // Brighter at edges, dimmer inside for depth
+        alpha: 0.15 + Math.random() * 0.4 + edgeFactor * 0.2,
       });
     }
 
-    // Interior scattered neurons
-    for (let i = 0; i < 150; i++) {
+    // Extra dense outline particles along brain edge
+    for (let t = 0; t < Math.PI * 2; t += 0.03) {
+      // Left hemisphere outline
+      const lx = Math.cos(t) * 0.58 - 0.13;
+      const ly = Math.sin(t) * 0.68;
+      const scatter = () => (Math.random() - 0.5) * scale * 0.06;
+      particles.push({
+        x: 0, y: 0,
+        originX: centerX + lx * scale + scatter(),
+        originY: centerY + ly * scale + scatter(),
+        vx: 0, vy: 0,
+        size: 0.4 + Math.random() * 1.2,
+        alpha: 0.2 + Math.random() * 0.3,
+      });
+
+      // Right hemisphere outline
+      const rx = Math.cos(t) * 0.58 + 0.13;
+      const ry = Math.sin(t) * 0.68;
+      particles.push({
+        x: 0, y: 0,
+        originX: centerX + rx * scale + scatter(),
+        originY: centerY + ry * scale + scatter(),
+        vx: 0, vy: 0,
+        size: 0.4 + Math.random() * 1.2,
+        alpha: 0.2 + Math.random() * 0.3,
+      });
+    }
+
+    // Scattered outer particles (dispersing from brain — like the original)
+    for (let i = 0; i < 80; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const r = Math.pow(Math.random(), 0.7) * brainR * 0.42;
-      const hemi = (Math.random() > 0.5 ? 1 : -1) * brainR * 0.04;
-      const px = centerX + Math.cos(angle) * r + hemi;
-      const py = centerY + Math.sin(angle) * r * 0.85;
-      const dx = px - centerX, dy = py - centerY;
-      if (dx * dx + dy * dy < radius * radius * 0.8) {
-        particles.push({
-          x: 0, y: 0, originX: px, originY: py,
-          vx: 0, vy: 0,
-          size: 0.8 + Math.random() * 2,
-          alpha: 0.2 + Math.random() * 0.5,
-          connections: [], layer: "brain",
-        });
-      }
+      const r = 0.6 + Math.random() * 0.5; // outside brain
+      const nx = Math.cos(angle) * r;
+      const ny = Math.sin(angle) * r * 0.75;
+
+      particles.push({
+        x: 0, y: 0,
+        originX: centerX + nx * scale,
+        originY: centerY + ny * scale,
+        vx: 0, vy: 0,
+        size: 0.3 + Math.random() * 1,
+        alpha: 0.05 + Math.random() * 0.15,
+      });
     }
 
     // Initialize positions
     for (const p of particles) {
-      p.x = p.originX + (Math.random() - 0.5) * 2;
-      p.y = p.originY + (Math.random() - 0.5) * 2;
-    }
-
-    // Precompute connections (brain particles only)
-    const brainParticles = particles.reduce<number[]>((acc, p, i) => {
-      if (p.layer === "brain") acc.push(i);
-      return acc;
-    }, []);
-
-    const connDist = brainR * 0.18;
-    for (let a = 0; a < brainParticles.length; a++) {
-      const i = brainParticles[a];
-      for (let b = a + 1; b < brainParticles.length; b++) {
-        const j = brainParticles[b];
-        const dx = particles[i].originX - particles[j].originX;
-        const dy = particles[i].originY - particles[j].originY;
-        if (dx * dx + dy * dy < connDist * connDist) {
-          if (particles[i].connections.length < 4) {
-            particles[i].connections.push(j);
-          }
-        }
+      if (p.x === 0 && p.y === 0) {
+        p.x = p.originX + (Math.random() - 0.5) * 2;
+        p.y = p.originY + (Math.random() - 0.5) * 2;
       }
     }
 
@@ -214,7 +157,6 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
     const handleMouseLeave = () => {
       mouseRef.current = { x: -1000, y: -1000 };
     };
-
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
@@ -224,8 +166,8 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
     const glowRaw = rootStyle.getPropertyValue("--glow").trim() || "215 80% 60%";
     const [gH = "215", gS = "80%", gL = "60%"] = glowRaw.split(/\s+/);
     const col = (a: number) => `hsla(${gH}, ${gS}, ${gL}, ${Math.min(1, Math.max(0, a))})`;
-    // Dimmer version for globe wireframe
-    const dimCol = (a: number) => `hsla(${gH}, ${gS}, 45%, ${Math.min(1, Math.max(0, a))})`;
+    // Brighter variant for highlights
+    const brightCol = (a: number) => `hsla(${gH}, 90%, 72%, ${Math.min(1, Math.max(0, a))})`;
 
     const animate = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
@@ -236,25 +178,12 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
 
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
-      const mouseRadius = 140;
-      time += 0.006;
-      rotationRef.current += 0.002;
-      const rot = rotationRef.current;
+      const mouseRadius = 120;
+      time += 0.005;
 
-      const cX = w * 0.5;
-      const cY = h * 0.45;
-
-      // Update particle positions
-      for (const p of particles) {
-        // Globe particles rotate slowly
-        if (p.layer === "globe") {
-          const dx = p.originX - cX;
-          const cos = Math.cos(0.002);
-          const sin = Math.sin(0.002);
-          p.originX = cX + dx * cos;
-          // Keep originY stable for latitude lines
-        }
-
+      // Update
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         const mdx = p.x - mouse.x;
         const mdy = p.y - mouse.y;
         const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -265,92 +194,55 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
           p.vy += (mdy / mDist) * force * 1.5;
         }
 
-        const floatX = Math.sin(time + p.originX * 0.01) * (p.layer === "brain" ? 1.5 : 0.5);
-        const floatY = Math.cos(time * 0.7 + p.originY * 0.01) * (p.layer === "brain" ? 1.5 : 0.5);
+        // Gentle organic float
+        const floatX = Math.sin(time * 1.2 + i * 0.07) * 1;
+        const floatY = Math.cos(time * 0.9 + i * 0.11) * 1;
 
-        p.vx += (p.originX + floatX - p.x) * 0.05;
-        p.vy += (p.originY + floatY - p.y) * 0.05;
-        p.vx *= 0.88;
-        p.vy *= 0.88;
+        p.vx += (p.originX + floatX - p.x) * 0.03;
+        p.vy += (p.originY + floatY - p.y) * 0.03;
+        p.vx *= 0.92;
+        p.vy *= 0.92;
         p.x += p.vx;
         p.y += p.vy;
       }
 
-      // --- Draw globe wireframe (dim, behind) ---
+      // Draw particles — soft glow dots like original
       for (const p of particles) {
-        if (p.layer !== "globe") continue;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = dimCol(p.alpha);
-        ctx.fill();
-      }
-
-      // Globe equator ring (animated)
-      const globeR = Math.min(w, h) * 0.32;
-      ctx.beginPath();
-      ctx.arc(cX, cY, globeR, 0, Math.PI * 2);
-      ctx.strokeStyle = dimCol(0.08);
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      // --- Draw brain connections ---
-      for (const p of particles) {
-        if (p.layer !== "brain") continue;
-        for (const j of p.connections) {
-          const q = particles[j];
-          const dx = p.x - q.x;
-          const dy = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = 65;
-          if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.22;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = col(alpha);
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // --- Draw brain particles ---
-      for (const p of particles) {
-        if (p.layer !== "brain") continue;
         const mdx = p.x - mouse.x;
         const mdy = p.y - mouse.y;
         const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        const proximity = Math.max(0, 1 - mDist / 220);
-        const size = p.size + proximity * 1.2;
+        const proximity = Math.max(0, 1 - mDist / 200);
 
-        // Ambient glow
+        const size = p.size + proximity * 1;
+
+        // Outer soft glow
         ctx.beginPath();
-        ctx.arc(p.x, p.y, size * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = col(0.03);
+        ctx.arc(p.x, p.y, size * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = col(p.alpha * 0.08);
         ctx.fill();
 
-        // Mouse proximity glow
-        if (proximity > 0.1) {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 4, 0, Math.PI * 2);
-          ctx.fillStyle = col(proximity * 0.08);
-          ctx.fill();
-        }
+        // Mid glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size * 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = col(p.alpha * 0.15);
+        ctx.fill();
 
-        // Core particle
+        // Core dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        ctx.fillStyle = col(p.alpha * 0.6);
+        ctx.fillStyle = proximity > 0.3
+          ? brightCol(p.alpha * 0.7 + proximity * 0.3)
+          : col(p.alpha * 0.55);
         ctx.fill();
-      }
 
-      // Pulsing energy ring at globe edge
-      const pulseAlpha = 0.04 + Math.sin(time * 3) * 0.02;
-      ctx.beginPath();
-      ctx.arc(cX, cY, globeR + 2, 0, Math.PI * 2);
-      ctx.strokeStyle = col(pulseAlpha);
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
+        // Bright center for larger particles
+        if (p.size > 2) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size * 0.4, 0, Math.PI * 2);
+          ctx.fillStyle = brightCol(p.alpha * 0.3);
+          ctx.fill();
+        }
+      }
 
       animFrameRef.current = requestAnimationFrame(animate);
     };
