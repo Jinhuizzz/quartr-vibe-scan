@@ -23,8 +23,8 @@ const DataBrainSection = () => {
               <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-accent/60" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary/60" />
                 </div>
                 <span className="text-text-dim text-xs font-mono ml-2">
                   watchwise_data_brain — intelligence_engine
