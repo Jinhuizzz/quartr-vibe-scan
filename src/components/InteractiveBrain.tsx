@@ -214,16 +214,22 @@ const InteractiveBrain = ({ className = "" }: { className?: string }) => {
         }
       }
 
-      // Draw particles
+      // Draw particles — always visible, mouse adds extra glow
       for (const p of particles) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const proximity = Math.max(0, 1 - dist / 220);
-        const alpha = p.alpha * 0.8 + proximity * 0.2;
-        const size = p.size + proximity * 2;
+        const alpha = p.alpha;
+        const size = p.size + proximity * 1.5;
 
-        // Glow
+        // Always-on ambient glow
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${glowHsl}, 0.06)`;
+        ctx.fill();
+
+        // Extra glow near mouse
         if (proximity > 0.1) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, size * 5, 0, Math.PI * 2);
