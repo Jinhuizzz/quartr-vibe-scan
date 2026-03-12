@@ -156,7 +156,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
           <div className="relative">
             <div className="absolute -inset-6 bg-primary/5 rounded-3xl blur-3xl pointer-events-none" />
 
-            <div className="grid md:grid-cols-2 gap-6 relative">
+            <div className="grid md:grid-cols-2 gap-6 relative items-start">
               {/* Chat mockup */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
