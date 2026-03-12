@@ -59,7 +59,7 @@ const Navbar = () => {
             to="/research"
             className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
           >
-            Get Report
+            Download APP
           </Link>
         </div>
       </div>
@@ -102,7 +102,7 @@ const Navbar = () => {
             onClick={() => setMobileOpen(false)}
             className="mt-2 text-center px-4 py-2.5 text-sm font-medium rounded-full bg-foreground text-background"
           >
-            Get Report
+            Download APP
           </Link>
         </motion.div>
       )}
