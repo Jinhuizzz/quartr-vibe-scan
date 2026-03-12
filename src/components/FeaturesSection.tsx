@@ -93,7 +93,7 @@ const MiraChatMockup = () => (
 
 const FeaturesSection = () => {
   return (
-    <section className="relative">
+    <section id="features" className="relative">
       {/* Horizontal rule with label */}
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-center gap-4 py-6 border-t border-border/50">
