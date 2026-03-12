@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import InteractiveBrain from "@/components/InteractiveBrain";
 
+
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
