@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import miraChartDemo from "@/assets/mira-chart-demo.png";
 
 const features = [
   {
@@ -32,75 +33,12 @@ const features = [
   },
 ];
 
-/* ---------- MIRA Chart Mockup ---------- */
-const MiraChartMockup = () => {
-  const bars = [
-    { label: "ORCL", value: 92, change: "+9.18" },
-    { label: "PLTR", value: 58, change: "+4.21" },
-    { label: "CRM", value: 35, change: "+1.87" },
-    { label: "SPY", value: 18, change: "-0.62" },
-    { label: "QQQ", value: 15, change: "-0.89" },
-  ];
-
-  return (
-    <div className="surface-card overflow-hidden rounded-xl border border-border/30 p-4 space-y-3">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded-md bg-primary/20 flex items-center justify-center">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-              <path d="M18 20V10M12 20V4M6 20v-6" />
-            </svg>
-          </div>
-          <span className="text-foreground text-xs font-semibold">Today's Movers</span>
-        </div>
-        <span className="text-text-dim text-[10px]">March 12, 2026</span>
-      </div>
-
-      {/* Bar chart */}
-      <div className="space-y-2.5">
-        {bars.map((bar) => (
-          <div key={bar.label} className="flex items-center gap-3">
-            <span className="text-text-secondary text-[11px] font-mono w-8 shrink-0">{bar.label}</span>
-            <div className="flex-1 h-5 bg-surface rounded-sm overflow-hidden">
-              <div
-                className={`h-full rounded-sm ${parseFloat(bar.change) >= 0 ? 'bg-primary' : 'bg-destructive/60'}`}
-                style={{ width: `${bar.value}%` }}
-              />
-            </div>
-            <span className={`text-[10px] font-mono w-12 text-right ${parseFloat(bar.change) >= 0 ? 'text-primary' : 'text-destructive'}`}>
-              {bar.change}%
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* ORCL trend line */}
-      <div className="bg-surface/60 rounded-lg p-3 border border-border/20">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-foreground text-[11px] font-semibold">ORCL — Post-Earnings Rally</span>
-          <span className="text-primary text-[10px]">~$160.17</span>
-        </div>
-        <svg viewBox="0 0 200 40" className="w-full h-8" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(217, 91%, 60%)" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="hsl(217, 91%, 60%)" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,30 L20,30 L40,28 L60,29 L80,30 L100,28 L120,25 L140,20 L155,12 L170,8 L185,6 L200,5"
-            fill="none" stroke="hsl(217, 91%, 60%)" strokeWidth="1.5"
-          />
-          <path
-            d="M0,30 L20,30 L40,28 L60,29 L80,30 L100,28 L120,25 L140,20 L155,12 L170,8 L185,6 L200,5 L200,40 L0,40Z"
-            fill="url(#sparkFill)"
-          />
-        </svg>
-      </div>
-    </div>
-  );
-};
+/* ---------- MIRA Chart Image ---------- */
+const MiraChartImage = () => (
+  <div className="surface-card overflow-hidden rounded-xl border border-border/30">
+    <img src={miraChartDemo} alt="MIRA auto-generated chart" className="w-full h-auto" />
+  </div>
+);
 
 /* ---------- MIRA Chat Mockup ---------- */
 const MiraChatMockup = () => (
