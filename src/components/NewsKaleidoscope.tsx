@@ -135,7 +135,7 @@ const NewsKaleidoscope = () => {
         {/* 3D Cylinder Carousel */}
         <div
           className="relative flex justify-center items-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
-          style={{ perspective: "900px", height: "400px", touchAction: "none" }}
+          style={{ perspective: "1200px", height: "440px", touchAction: "none" }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
