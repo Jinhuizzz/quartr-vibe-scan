@@ -57,7 +57,7 @@ const HeroSection = () => {
             transition={{ duration: 1.2, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
             className="absolute bottom-[15%] right-[5%] md:right-[10%] font-display font-bold tracking-[-0.04em] leading-none text-[clamp(3rem,10vw,9rem)] text-gradient z-20"
           >
-            Gain
+            Gain.
           </motion.span>
         </div>
 
@@ -69,22 +69,15 @@ const HeroSection = () => {
           className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8"
         >
           <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-sm">
-            The proactive AI Agent powered by WatchWise Data Brain.
-            Research faster. Understand deeper. Trust every finding.
+            Research Before Trade — Your all-in-one investment hub for Wall Street strategies, powered by OpenClaw Finance.
           </p>
           <div className="flex items-center gap-3 pointer-events-auto">
             <Link
               to="/research"
               className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-all"
             >
-              Get Report
+              Try Now
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              to="/mira"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-border/80 text-foreground font-medium text-sm hover:border-primary/50 hover:bg-surface-elevated transition-all"
-            >
-              Ask MIRA
             </Link>
           </div>
         </motion.div>
