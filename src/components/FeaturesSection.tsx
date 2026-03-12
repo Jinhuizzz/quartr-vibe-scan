@@ -1,6 +1,5 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import miraChartDemo from "@/assets/mira-chart-demo.png";
 import miraBarChart from "@/assets/mira-bar-chart.png";
 
 const features = [
@@ -34,12 +33,6 @@ const features = [
   },
 ];
 
-/* ---------- MIRA Chart Image ---------- */
-const MiraChartImage = () => (
-  <div className="surface-card overflow-hidden rounded-xl border border-border/30">
-    <img src={miraChartDemo} alt="MIRA auto-generated chart" className="w-full h-auto" />
-  </div>
-);
 
 /* ---------- MIRA Chat Mockup ---------- */
 const MiraChatMockup = () => (
