@@ -69,7 +69,7 @@ const HeroSection = () => {
           className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8"
         >
           <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-sm">
-            Research Before Trade — Your all-in-one investment hub for Wall Street strategies, powered by OpenClaw Finance.
+            Your all-in-one investment hub for Wall-Street strategies. Research before Trade.
           </p>
           <div className="flex items-center gap-3 pointer-events-auto">
             <Link
