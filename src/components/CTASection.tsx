@@ -1,6 +1,5 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CTASection = () => {
