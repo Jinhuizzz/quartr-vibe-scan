@@ -127,7 +127,7 @@ const NewsKaleidoscope = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-0 flex flex-col items-center text-center"
+          className="mb-14 flex flex-col items-center text-center"
         >
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             What's happening now?
