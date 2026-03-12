@@ -143,7 +143,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               transition={{ duration: 0.5, delay: 0.2 }}
               className="md:col-span-5 flex flex-col justify-end"
             >
-              <p className="text-text-secondary text-base md:text-lg leading-relaxed">
+              <p className="text-text-secondary text-base leading-relaxed">
                 {feature.description}
               </p>
               <p className="text-text-dim text-sm italic mt-2">
