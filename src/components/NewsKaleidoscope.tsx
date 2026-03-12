@@ -180,12 +180,12 @@ const NewsKaleidoscope = () => {
                         {news.date}
                       </span>
                     </div>
-                    <div className="p-3 flex flex-col justify-between h-[50%]">
+                    <div className="p-2.5 flex flex-col justify-between h-[50%]">
                       <div>
-                        <h3 className="font-display font-bold text-foreground text-sm leading-snug mb-1.5">
+                        <h3 className="font-display font-bold text-foreground text-xs md:text-sm leading-snug mb-1 line-clamp-2">
                           {news.title}
                         </h3>
-                        <p className="text-text-secondary text-[11px] leading-relaxed line-clamp-3">
+                        <p className="text-text-secondary text-[10px] leading-relaxed line-clamp-2">
                           {news.summary}
                         </p>
                       </div>
