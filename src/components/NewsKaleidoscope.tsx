@@ -63,7 +63,10 @@ const tagColors: Record<string, string> = {
 
 const CARD_COUNT = newsItems.length;
 const ANGLE_STEP = 360 / CARD_COUNT;
-const RADIUS = 220;
+const RADIUS = 280;
+const AUTO_ROTATE_INTERVAL = 3000;
+const CARD_W = 240;
+const CARD_H = 340;
 const AUTO_ROTATE_INTERVAL = 3000;
 
 const NewsKaleidoscope = () => {
