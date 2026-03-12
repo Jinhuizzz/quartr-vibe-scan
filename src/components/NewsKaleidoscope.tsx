@@ -179,11 +179,14 @@ const NewsKaleidoscope = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-16 flex flex-col items-center text-center"
         >
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             What's happening now?
           </h2>
+          <button className="mt-6 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+            Try on App →
+          </button>
         </motion.div>
 
         {/* Tinder-style card stack */}
