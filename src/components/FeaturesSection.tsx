@@ -11,7 +11,7 @@ const features = [
   {
     number: "02",
     title: "Deep Research, done in seconds.",
-    description: "Let MIRA, your AI trading assistant do scans real-time data to uncover hidden risks and opportunities you might miss.",
+    description: "Let MIRA, your AI trading assistant scans real-time data to uncover hidden risks and opportunities you might miss.",
     detail: "Watch MIRA think, analyze, and answer — fully transparent.",
   },
   {
