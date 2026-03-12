@@ -303,6 +303,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
                   <div className="absolute top-[18px] left-1/2 -translate-x-1/2 w-[80px] h-[24px] bg-[hsl(0,0%,0%)] rounded-full z-10" />
                   {/* Screen */}
                   <div className="relative rounded-[2.2rem] overflow-hidden bg-[hsl(0,0%,0%)]">
+                    <div className="h-[28px] bg-[hsl(0,0%,0%)]" />
                     <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto block" />
                   </div>
                   {/* Home indicator */}
