@@ -249,6 +249,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
     );
   }
 
+  return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0 }}
