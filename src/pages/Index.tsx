@@ -4,9 +4,7 @@ import NewsKaleidoscope from "@/components/NewsKaleidoscope";
 import ManifestoSection from "@/components/ManifestoSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import DataBrainSection from "@/components/DataBrainSection";
-import TickerBar from "@/components/TickerBar";
 import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -18,8 +16,6 @@ const Index = () => {
       <ManifestoSection />
       <DataBrainSection />
       <CTASection />
-      <TickerBar />
-      <Footer />
     </div>
   );
 };
