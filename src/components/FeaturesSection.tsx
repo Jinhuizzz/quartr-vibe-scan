@@ -10,15 +10,15 @@ const features = [
   },
   {
     number: "02",
-    title: "Deep Research",
-    description: "Turn complex data into clear, visualized intelligence. From fragmented to structured — thematic and narrative.",
-    detail: "Institutional-grade reports generated in seconds, not days.",
+    title: "Deep Research, done in seconds.",
+    description: "Let MIRA, your AI trading assistant do scans real-time data to uncover hidden risks and opportunities you might miss.",
+    detail: "Watch MIRA think, analyze, and answer — fully transparent.",
   },
   {
     number: "03",
-    title: "Ask MIRA",
-    description: "Your AI trading assistant scans real-time data to uncover hidden risks and opportunities you might miss.",
-    detail: "Watch MIRA think, analyze, and answer — fully transparent.",
+    title: "Wall Street-grade report",
+    description: "Turn complex data into clear, visualized intelligence. From fragmented to structured — thematic and narrative.",
+    detail: "Institutional-grade reports generated in seconds, not days.",
   },
   {
     number: "04",
