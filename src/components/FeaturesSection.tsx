@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import miraChartDemo from "@/assets/mira-chart-demo.png";
+import miraBarChart from "@/assets/mira-bar-chart.png";
 
 const features = [
   {
