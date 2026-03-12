@@ -25,7 +25,7 @@ const ManifestoSection = () => {
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.15, ease: [0.25, 0.1, 0, 1] }}
             >
-              <span className={`block font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] ${
+              <span className={`block font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] ${
                 i === words.length - 1 ? "text-gradient" : "text-foreground"
               }`}>
                 {word}
