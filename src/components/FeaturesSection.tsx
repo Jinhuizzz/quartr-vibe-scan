@@ -223,16 +223,25 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               </p>
             </motion.div>
 
-            {/* Right: chat mockup */}
+            {/* Right: two mockups stacked */}
             <motion.div
-              initial={{ opacity: 0, x: 30, rotateY: -5 }}
-              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+              initial={{ opacity: 0, x: 30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.4 }}
-              className="relative"
+              className="relative space-y-6"
             >
               <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl" />
+              
+              {/* Chat mockup */}
               <div className="relative">
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">AI-powered conversational research</p>
                 <MiraChatMockup />
+              </div>
+
+              {/* Chart mockup */}
+              <div className="relative">
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
+                <MiraChartMockup />
               </div>
             </motion.div>
           </div>
