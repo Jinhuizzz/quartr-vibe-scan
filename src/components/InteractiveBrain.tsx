@@ -60,11 +60,9 @@ function BrainModel() {
   useFrame((state) => {
     if (!groupRef.current) return;
     const t = state.clock.elapsedTime;
-    // Gentle auto-rotation + mouse influence
-    groupRef.current.rotation.y = t * 0.15 + mouseRef.current.x * 0.3;
-    groupRef.current.rotation.x = Math.sin(t * 0.3) * 0.05 + mouseRef.current.y * 0.15;
-    // Subtle floating
-    groupRef.current.position.y = Math.sin(t * 0.5) * 0.08;
+    // Gentle auto-rotation only, no floating or mouse influence
+    groupRef.current.rotation.y = t * 0.15;
+    groupRef.current.position.y = 0;
   });
 
   return (
