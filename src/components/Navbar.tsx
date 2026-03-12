@@ -4,10 +4,8 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Research", href: "/research" },
-  { label: "ASK MIRA", href: "/mira" },
-  { label: "Features", href: "/features" },
-  { label: "Blog", href: "/blog" },
+  { label: "Features", href: "/#features" },
+  { label: "Blog", href: "https://substack.com", external: true },
 ];
 
 const Navbar = () => {
