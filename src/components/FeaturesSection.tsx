@@ -193,56 +193,47 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
         className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
-          {/* Number */}
+          {/* Number + Text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-10"
+            className="mb-12"
           >
-            <span className="text-text-dim text-xs font-mono tracking-wider">{feature.number}</span>
+            <span className="text-text-dim text-xs font-mono tracking-wider block mb-6">{feature.number}</span>
+            <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground group-hover:text-gradient-warm transition-all duration-500 leading-[1.1] mb-4">
+              {feature.title}
+            </h3>
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-2xl">
+              {feature.description}
+            </p>
+            <p className="text-text-dim text-sm italic mt-2">
+              {feature.detail}
+            </p>
           </motion.div>
 
-          {/* Two-column: text left, mockup right */}
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left: text content */}
+          {/* Two mockups side by side */}
+          <div className="grid md:grid-cols-2 gap-6 relative">
+            <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl" />
+            
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="relative"
             >
-              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground group-hover:text-gradient-warm transition-all duration-500 leading-[1.1]">
-                {feature.title}
-              </h3>
-              <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-lg">
-                {feature.description}
-              </p>
-              <p className="text-text-dim text-sm italic">
-                {feature.detail}
-              </p>
+              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">AI-powered conversational research</p>
+              <MiraChatMockup />
             </motion.div>
 
-            {/* Right: two mockups stacked */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.9, delay: 0.4 }}
-              className="relative space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="relative"
             >
-              <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl" />
-              
-              {/* Chat mockup */}
-              <div className="relative">
-                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">AI-powered conversational research</p>
-                <MiraChatMockup />
-              </div>
-
-              {/* Chart mockup */}
-              <div className="relative">
-                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
-                <MiraChartMockup />
-              </div>
+              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
+              <MiraChartMockup />
             </motion.div>
           </div>
         </div>
