@@ -184,9 +184,6 @@ const NewsKaleidoscope = () => {
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             What's happening now?
           </h2>
-          <button className="mt-6 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
-            Try on App →
-          </button>
         </motion.div>
 
         {/* Tinder-style card stack */}
@@ -234,17 +231,25 @@ const NewsKaleidoscope = () => {
           </div>
         </div>
 
-        {/* Swipe hint */}
+        {/* Bottom area */}
         {!allSwiped && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="text-center text-text-dim text-xs mt-8 tracking-wide"
-          >
-            ← SWIPE LEFT TO SKIP · SWIPE RIGHT TO SAVE →
-          </motion.p>
+          <div className="flex flex-col items-center gap-4 mt-10">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="text-text-dim text-xs tracking-wide"
+            >
+              ← SWIPE LEFT TO SKIP · SWIPE RIGHT TO SAVE →
+            </motion.p>
+            <a
+              href="#"
+              className="glow-sm bg-primary hover:bg-primary/90 text-primary-foreground px-5 py-2 rounded-full text-sm font-medium transition-colors"
+            >
+              Try on App
+            </a>
+          </div>
         )}
       </div>
     </section>
