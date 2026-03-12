@@ -23,18 +23,11 @@ const features = [
   },
   {
     number: "03",
-    title: "Wall Street-grade report",
+    title: "Wall Street-grade report.",
     description: "From fragmented to structured — thematic and narrative. Forsee the market trends before it reacts.",
     detail: "Generated in seconds, not days.",
     hasVisual: false,
     visualType: "report",
-  },
-  {
-    number: "04",
-    title: "Quantamental Loop",
-    description: "Thesis. Risks. Valuation. The complete quantamental loop powered by Wall Street-grade algorithms.",
-    detail: "Every insight traceable. Every conclusion verifiable.",
-    hasVisual: false,
   },
 ];
 
