@@ -129,59 +129,66 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
         className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
       >
         <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
-          {/* Number + Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-12"
-          >
-            <span className="text-text-dim text-xs font-mono tracking-wider block mb-6">{feature.number}</span>
-            <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground group-hover:text-gradient-warm transition-all duration-500 leading-[1.1] mb-4">
-              {feature.title}
-            </h3>
-            <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-2xl">
-              {feature.description}
-            </p>
-            <p className="text-text-dim text-sm italic mt-2">
-              {feature.detail}
-            </p>
-          </motion.div>
+          {/* Header row: number + title left, description right */}
+          <div className="grid md:grid-cols-12 gap-6 md:gap-12 mb-14">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="md:col-span-7"
+            >
+              <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
+              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground group-hover:text-gradient-warm transition-all duration-500 leading-[1.1]">
+                {feature.title}
+              </h3>
+            </motion.div>
 
-          {/* Two mockups side by side */}
-          <div className="grid md:grid-cols-2 gap-6 relative">
-            <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl" />
-            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="md:col-span-5 flex flex-col justify-end"
+            >
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed">
+                {feature.description}
+              </p>
+              <p className="text-text-dim text-sm italic mt-2">
+                {feature.detail}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Visuals: chat left (larger), input + chart right (stacked) */}
+          <div className="grid md:grid-cols-5 gap-5 relative">
+            <div className="absolute -inset-6 bg-primary/5 rounded-3xl blur-3xl pointer-events-none" />
+
+            {/* Chat mockup - takes 3 cols */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative"
+              className="relative md:col-span-3"
             >
-              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">AI-powered conversational research</p>
+              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Conversational research</p>
               <MiraChatMockup />
             </motion.div>
 
+            {/* Right column: input bar + bar chart stacked */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="relative"
+              className="relative md:col-span-2 flex flex-col gap-5"
             >
-              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
-              <MiraChartImage />
-            </motion.div>
-
-            {/* Bar chart image - full width below */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="relative md:col-span-2"
-            >
-              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Normalized valuation comparison</p>
-              <div className="surface-card overflow-hidden rounded-xl border border-border/30">
-                <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
+              <div>
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Auto-generated charts</p>
+                <MiraChartImage />
+              </div>
+              <div>
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Valuation comparison</p>
+                <div className="surface-card overflow-hidden rounded-xl border border-border/30">
+                  <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
+                </div>
               </div>
             </motion.div>
           </div>
