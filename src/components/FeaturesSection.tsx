@@ -218,7 +218,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <span className="text-text-dim text-xs font-mono tracking-wider block mb-3">{feature.number}</span>
-              <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
                 {feature.title}
               </h3>
             </motion.div>
