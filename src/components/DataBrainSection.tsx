@@ -36,13 +36,13 @@ const DataBrainSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.12 }}
-              className="bg-background p-8 md:p-12 group"
+              className="bg-background p-6 md:p-12 group overflow-hidden"
             >
               <div className="mb-6">
-                <span className="font-display text-5xl md:text-7xl font-bold tracking-tighter text-foreground">
+                <span className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground break-words">
                   {stat.value}
                 </span>
-                <span className="font-display text-3xl md:text-5xl font-bold text-primary">
+                <span className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-primary">
                   {stat.suffix}
                 </span>
               </div>
