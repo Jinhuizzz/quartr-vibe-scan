@@ -184,9 +184,6 @@ const NewsKaleidoscope = () => {
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             What's happening now?
           </h2>
-          <button className="mt-6 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
-            Try on App →
-          </button>
         </motion.div>
 
         {/* Tinder-style card stack */}
