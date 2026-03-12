@@ -1,18 +1,23 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Research", href: "/research" },
-  { label: "ASK MIRA", href: "/mira" },
-  { label: "Features", href: "/features" },
-  { label: "Blog", href: "/blog" },
+  { label: "Features", href: "/#features", external: false },
+  { label: "Blog", href: "https://substack.com", external: true },
 ];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
+
+  const handleNavClick = (item: typeof navItems[0], e: React.MouseEvent) => {
+    if (item.external) return; // let default <a> handle it
+    e.preventDefault();
+    const id = item.href.replace("/#", "");
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <motion.header
@@ -23,7 +28,6 @@ const Navbar = () => {
     >
       {/* Desktop */}
       <div className="hidden md:flex items-center w-full max-w-screen-xl">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 mr-auto">
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <span className="font-display font-bold text-primary-foreground text-sm">W</span>
@@ -33,27 +37,31 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Center pill nav */}
         <nav className="nav-glass rounded-full px-2 py-1.5 flex items-center gap-1">
-          {navItems.map((item) => {
-            const active = location.pathname === item.href;
-            return (
-              <Link
+          {navItems.map((item) =>
+            item.external ? (
+              <a
                 key={item.href}
-                to={item.href}
-                className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-                  active
-                    ? "text-foreground bg-surface-elevated"
-                    : "text-text-secondary hover:text-foreground"
-                }`}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors text-text-secondary hover:text-foreground"
               >
                 {item.label}
-              </Link>
-            );
-          })}
+              </a>
+            ) : (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(item, e)}
+                className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors text-text-secondary hover:text-foreground cursor-pointer"
+              >
+                {item.label}
+              </a>
+            )
+          )}
         </nav>
 
-        {/* CTA */}
         <div className="ml-auto">
           <Link
             to="/research"
@@ -72,31 +80,40 @@ const Navbar = () => {
           </div>
           <span className="font-display font-semibold text-foreground">WatchWise</span>
         </Link>
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="text-foreground"
-        >
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="text-foreground">
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden absolute top-full left-4 right-4 mt-2 nav-glass rounded-2xl p-4 flex flex-col gap-2"
         >
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="px-4 py-2.5 text-sm text-text-secondary hover:text-foreground rounded-lg hover:bg-surface-elevated transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) =>
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="px-4 py-2.5 text-sm text-text-secondary hover:text-foreground rounded-lg hover:bg-surface-elevated transition-colors"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => { handleNavClick(item, e); setMobileOpen(false); }}
+                className="px-4 py-2.5 text-sm text-text-secondary hover:text-foreground rounded-lg hover:bg-surface-elevated transition-colors"
+              >
+                {item.label}
+              </a>
+            )
+          )}
           <Link
             to="/research"
             onClick={() => setMobileOpen(false)}
