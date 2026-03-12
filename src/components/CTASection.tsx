@@ -46,10 +46,9 @@ const CTASection = () => {
                 <div>
                   <Link
                     to="/research"
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-medium hover:bg-foreground/90 transition-all glow-sm"
+                    className="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
                   >
                     Get Started Free
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
