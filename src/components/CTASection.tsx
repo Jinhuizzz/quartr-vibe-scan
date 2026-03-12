@@ -17,7 +17,7 @@ const CTASection = () => {
             transition={{ duration: 1 }}
             className="absolute -top-16 md:-top-24 left-0 right-0 pointer-events-none select-none overflow-hidden text-center"
           >
-            <span className="block font-display text-[clamp(5rem,15vw,14rem)] font-bold tracking-tighter leading-none outline-text-dim opacity-30">
+            <span className="block font-display text-[clamp(5rem,15vw,14rem)] font-bold tracking-[0.15em] leading-none outline-text-dim opacity-30">
               RELIABLE
             </span>
           </motion.div>
