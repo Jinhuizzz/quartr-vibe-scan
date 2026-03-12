@@ -133,6 +133,65 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
 
   const isEven = index % 2 === 0;
 
+  // Special layout for Deep Research (02) — side-by-side with chat mockup
+  if (feature.hasVisual) {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
+          {/* Number */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-10"
+          >
+            <span className="text-text-dim text-xs font-mono tracking-wider">{feature.number}</span>
+          </motion.div>
+
+          {/* Two-column: text left, mockup right */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: text content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="space-y-6"
+            >
+              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground group-hover:text-gradient-warm transition-all duration-500 leading-[1.1]">
+                {feature.title}
+              </h3>
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed max-w-lg">
+                {feature.description}
+              </p>
+              <p className="text-text-dim text-sm italic">
+                {feature.detail}
+              </p>
+            </motion.div>
+
+            {/* Right: chat mockup */}
+            <motion.div
+              initial={{ opacity: 0, x: 30, rotateY: -5 }}
+              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+              transition={{ duration: 0.9, delay: 0.4 }}
+              className="relative"
+            >
+              <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl" />
+              <div className="relative">
+                <MiraChatMockup />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       ref={ref}
@@ -153,7 +212,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
             <span className="text-text-dim text-xs font-mono tracking-wider">{feature.number}</span>
           </motion.div>
 
-          {/* Title — large */}
+          {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -180,18 +239,6 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
             </p>
           </motion.div>
         </div>
-
-        {/* Visual for Deep Research */}
-        {feature.hasVisual && (
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-12 md:mt-16 md:ml-[16.666%] max-w-md"
-          >
-            <MiraChatMockup />
-          </motion.div>
-        )}
       </div>
     </motion.div>
   );
