@@ -181,8 +181,11 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
                     <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
                   </div>
                 </div>
-                <div className="surface-card overflow-hidden rounded-xl border border-border/30">
-                  <img src={miraSandbox} alt="MIRA sandbox execution process" className="w-full h-auto" />
+                <div>
+                  <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Sandbox process</p>
+                  <div className="surface-card overflow-hidden rounded-xl border border-border/30">
+                    <img src={miraSandbox} alt="MIRA sandbox execution process" className="w-full h-auto" />
+                  </div>
                 </div>
               </motion.div>
             </div>
