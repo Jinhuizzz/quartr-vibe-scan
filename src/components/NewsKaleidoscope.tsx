@@ -1,5 +1,5 @@
-import { motion, useAnimationControls } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useRef, useState, useCallback, useEffect } from "react";
 
 const newsItems = [
   {
@@ -7,7 +7,7 @@ const newsItems = [
     date: "Mar 12",
     tag: "AI & Tech",
     title: "NVIDIA Surges on Record Data Center Revenue",
-    summary: "Q4 earnings beat expectations with $22.1B in data center sales, driven by unprecedented AI chip demand.",
+    summary: "Q4 earnings beat expectations with $22.1B in data center sales.",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
   },
   {
@@ -15,7 +15,7 @@ const newsItems = [
     date: "Mar 12",
     tag: "Macro",
     title: "Fed Signals Potential Rate Cut in June",
-    summary: "Chair Powell's testimony hints at easing cycle as inflation trends toward 2% target.",
+    summary: "Chair Powell's testimony hints at easing cycle as inflation trends toward 2%.",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
   },
   {
@@ -23,7 +23,7 @@ const newsItems = [
     date: "Mar 11",
     tag: "Crypto",
     title: "Bitcoin ETF Inflows Hit $1.2B Single-Day Record",
-    summary: "Institutional adoption accelerates as BlackRock's IBIT leads with $760M in net inflows.",
+    summary: "Institutional adoption accelerates as BlackRock's IBIT leads with $760M.",
     image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=600&h=400&fit=crop",
   },
   {
@@ -31,7 +31,7 @@ const newsItems = [
     date: "Mar 11",
     tag: "Healthcare",
     title: "Novo Nordisk Obesity Drug Shows 25% Weight Loss",
-    summary: "Phase 3 trial results exceed expectations, sending shares to all-time highs in pre-market.",
+    summary: "Phase 3 trial results exceed expectations, sending shares to all-time highs.",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
   },
   {
@@ -46,7 +46,7 @@ const newsItems = [
     id: 6,
     date: "Mar 10",
     tag: "Earnings",
-    title: "Apple Services Revenue Crosses $100B Annual Run Rate",
+    title: "Apple Services Revenue Crosses $100B Run Rate",
     summary: "Subscription growth offsets iPhone softness as ecosystem monetization deepens.",
     image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop",
   },
@@ -63,36 +63,60 @@ const tagColors: Record<string, string> = {
 
 const CARD_COUNT = newsItems.length;
 const ANGLE_STEP = 360 / CARD_COUNT;
-const RADIUS_X = 320; // horizontal radius (ellipse width)
-const RADIUS_Y = 60;  // vertical radius (ellipse height) — creates the vertical ellipse feel
+const RADIUS = 260;
+const AUTO_ROTATE_INTERVAL = 3000;
 
 const NewsKaleidoscope = () => {
   const [rotation, setRotation] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const dragStartX = useRef(0);
   const dragStartRotation = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // IntersectionObserver for auto-rotate on scroll into view
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Auto-rotate: runs when in view and not hovered
+  useEffect(() => {
+    if (!isInView || isHovered) return;
+    const timer = setInterval(() => {
+      setRotation((prev) => prev - ANGLE_STEP);
+    }, AUTO_ROTATE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [isInView, isHovered]);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     dragStartX.current = e.clientX;
     dragStartRotation.current = rotation;
+    isDragging.current = true;
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
   }, [rotation]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
-    if (!(e.target as HTMLElement).hasPointerCapture(e.pointerId)) return;
+    if (!isDragging.current) return;
     const dx = e.clientX - dragStartX.current;
-    setRotation(dragStartRotation.current + dx * 0.3);
+    setRotation(dragStartRotation.current + dx * 0.35);
   }, []);
 
   const handlePointerUp = useCallback((e: React.PointerEvent) => {
+    isDragging.current = false;
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
-    // Snap to nearest card
-    const snapped = Math.round(rotation / ANGLE_STEP) * ANGLE_STEP;
-    setRotation(snapped);
-  }, [rotation]);
+    setRotation((prev) => Math.round(prev / ANGLE_STEP) * ANGLE_STEP);
+  }, []);
 
   return (
-    <section className="py-24 md:py-36 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 md:py-36 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-10" />
 
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 relative z-10">
@@ -101,7 +125,7 @@ const NewsKaleidoscope = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-16 flex flex-col items-center text-center"
+          className="mb-12 flex flex-col items-center text-center"
         >
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             What's happening now?
@@ -110,41 +134,38 @@ const NewsKaleidoscope = () => {
 
         {/* 3D Cylinder Carousel */}
         <div
-          ref={containerRef}
-          className="relative flex justify-center items-center select-none"
-          style={{ perspective: "1000px", height: "520px", touchAction: "none" }}
+          className="relative flex justify-center items-center select-none cursor-grab active:cursor-grabbing"
+          style={{ perspective: "900px", height: "380px", touchAction: "none" }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           <motion.div
             className="relative"
             style={{
-              width: "280px",
-              height: "420px",
+              width: "220px",
+              height: "320px",
               transformStyle: "preserve-3d",
             }}
             animate={{ rotateY: rotation }}
-            transition={{ type: "spring", stiffness: 200, damping: 30 }}
+            transition={{ type: "spring", stiffness: 180, damping: 28 }}
           >
             {newsItems.map((news, i) => {
               const angle = i * ANGLE_STEP;
-              // Position each card on an elliptical cylinder
-              const translateZ = RADIUS_X;
-              const translateY = Math.sin((angle * Math.PI) / 180) * RADIUS_Y;
 
               return (
                 <div
                   key={news.id}
-                  className="absolute inset-0 w-[280px] md:w-[300px] backface-hidden"
+                  className="absolute inset-0 w-[220px] h-[320px]"
                   style={{
-                    transform: `rotateY(${angle}deg) translateZ(${translateZ}px) translateY(${translateY}px)`,
+                    transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
                     backfaceVisibility: "hidden",
                   }}
                 >
-                  <div className="surface-card h-full overflow-hidden rounded-2xl">
-                    {/* Image */}
-                    <div className="relative h-[55%] overflow-hidden">
+                  <div className="surface-card h-full overflow-hidden rounded-xl">
+                    <div className="relative h-[50%] overflow-hidden">
                       <img
                         src={news.image}
                         alt={news.title}
@@ -152,27 +173,23 @@ const NewsKaleidoscope = () => {
                         draggable={false}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                      <span className={`absolute top-3 left-3 text-xs font-medium px-2.5 py-1 rounded-full ${tagColors[news.tag] || "bg-muted text-muted-foreground"}`}>
+                      <span className={`absolute top-2 left-2 text-[10px] font-medium px-2 py-0.5 rounded-full ${tagColors[news.tag] || "bg-muted text-muted-foreground"}`}>
                         {news.tag}
                       </span>
-                      <span className="absolute top-3 right-3 text-text-dim text-xs bg-card/60 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <span className="absolute top-2 right-2 text-text-dim text-[10px] bg-card/60 backdrop-blur-sm px-1.5 py-0.5 rounded-full">
                         {news.date}
                       </span>
                     </div>
-
-                    {/* Content */}
-                    <div className="p-5 flex flex-col justify-between h-[45%]">
+                    <div className="p-3 flex flex-col justify-between h-[50%]">
                       <div>
-                        <h3 className="font-display font-bold text-foreground text-base md:text-lg leading-snug mb-2">
+                        <h3 className="font-display font-bold text-foreground text-sm leading-snug mb-1.5">
                           {news.title}
                         </h3>
-                        <p className="text-text-secondary text-xs leading-relaxed line-clamp-3">
+                        <p className="text-text-secondary text-[11px] leading-relaxed line-clamp-3">
                           {news.summary}
                         </p>
                       </div>
-                      <div className="flex items-center justify-between mt-3">
-                        <span className="text-text-dim text-xs">WatchWise AI</span>
-                      </div>
+                      <span className="text-text-dim text-[10px] mt-2">WatchWise AI</span>
                     </div>
                   </div>
                 </div>
@@ -181,8 +198,8 @@ const NewsKaleidoscope = () => {
           </motion.div>
         </div>
 
-        {/* Bottom hint */}
-        <div className="flex flex-col items-center gap-5 mt-10">
+        {/* Bottom */}
+        <div className="flex flex-col items-center gap-5 mt-8">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -190,7 +207,7 @@ const NewsKaleidoscope = () => {
             transition={{ delay: 0.8, duration: 0.5 }}
             className="text-text-dim text-xs tracking-wide"
           >
-            ← DRAG TO EXPLORE →
+            ← SWIPE TO EXPLORE →
           </motion.p>
           <a
             href="#"
