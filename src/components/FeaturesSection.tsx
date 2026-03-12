@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import miraChartDemo from "@/assets/mira-chart-demo.png";
+import miraBarChart from "@/assets/mira-bar-chart.png";
 
 const features = [
   {
@@ -169,6 +170,19 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
             >
               <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
               <MiraChartImage />
+            </motion.div>
+
+            {/* Bar chart image - full width below */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="relative md:col-span-2"
+            >
+              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Normalized valuation comparison</p>
+              <div className="surface-card overflow-hidden rounded-xl border border-border/30">
+                <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
+              </div>
             </motion.div>
           </div>
         </div>
