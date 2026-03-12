@@ -23,7 +23,7 @@ const features = [
     number: "03",
     title: "Wall Street-grade report",
     description: "From fragmented to structured — thematic and narrative. Forsee the market trends before it reacts.",
-    detail: "Institutional-grade reports generated in seconds, not days.",
+    detail: "Generated in seconds, not days.",
     hasVisual: false,
     visualType: "report",
   },
@@ -214,22 +214,21 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="md:max-w-sm"
             >
-              <p className="text-text-secondary text-base leading-relaxed">{feature.description}</p>
-              <p className="text-text-dim text-sm italic mt-1">{feature.detail}</p>
+              <span className="text-text-dim text-xs font-mono tracking-wider block mb-3">{feature.number}</span>
+              <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+                {feature.title}
+              </h3>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="md:text-right"
+              className="md:text-right md:max-w-md"
             >
-              <span className="text-text-dim text-xs font-mono tracking-wider block mb-3">{feature.number}</span>
-              <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
-                {feature.title}
-              </h3>
+              <p className="text-text-secondary text-base leading-relaxed">{feature.description}</p>
+              <p className="text-text-dim text-sm italic mt-2">{feature.detail}</p>
             </motion.div>
           </div>
 
