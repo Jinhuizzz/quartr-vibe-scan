@@ -289,24 +289,24 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               transition={{ duration: 0.7, delay: 0.3 }}
               className="md:col-span-6 lg:col-span-5 flex justify-center"
             >
-              <div className="relative w-full max-w-[320px]">
+              <div className="relative w-full max-w-[380px]">
                 <div className="absolute -inset-8 bg-primary/5 rounded-[3rem] blur-3xl pointer-events-none" />
                 {/* iPhone-style frame */}
-                <div className="relative bg-[hsl(0,0%,4%)] rounded-[3rem] p-[10px] border border-[hsl(0,0%,18%)] shadow-[0_20px_60px_-15px_hsl(215,60%,55%,0.15)]">
+                <div className="relative bg-[hsl(0,0%,2%)] rounded-[3.2rem] p-[12px] border-2 border-[hsl(0,0%,22%)] shadow-[0_25px_70px_-15px_hsl(215,60%,55%,0.15)]">
                   {/* Side buttons - left */}
-                  <div className="absolute left-[-2px] top-[100px] w-[3px] h-[28px] bg-[hsl(0,0%,15%)] rounded-l-sm" />
-                  <div className="absolute left-[-2px] top-[148px] w-[3px] h-[50px] bg-[hsl(0,0%,15%)] rounded-l-sm" />
-                  <div className="absolute left-[-2px] top-[208px] w-[3px] h-[50px] bg-[hsl(0,0%,15%)] rounded-l-sm" />
+                  <div className="absolute left-[-3px] top-[120px] w-[3px] h-[32px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
+                  <div className="absolute left-[-3px] top-[172px] w-[3px] h-[56px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
+                  <div className="absolute left-[-3px] top-[242px] w-[3px] h-[56px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
                   {/* Side button - right */}
-                  <div className="absolute right-[-2px] top-[160px] w-[3px] h-[65px] bg-[hsl(0,0%,15%)] rounded-r-sm" />
+                  <div className="absolute right-[-3px] top-[185px] w-[3px] h-[72px] bg-[hsl(0,0%,20%)] rounded-r-sm" />
                   {/* Dynamic Island */}
-                  <div className="absolute top-[18px] left-1/2 -translate-x-1/2 w-[90px] h-[28px] bg-[hsl(0,0%,0%)] rounded-full z-10" />
+                  <div className="absolute top-[22px] left-1/2 -translate-x-1/2 w-[100px] h-[30px] bg-[hsl(0,0%,0%)] rounded-full z-10" />
                   {/* Screen */}
-                  <div className="relative rounded-[2.4rem] overflow-hidden bg-[hsl(0,0%,0%)]">
+                  <div className="relative rounded-[2.6rem] overflow-hidden bg-[hsl(0,0%,0%)]">
                     <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto block" />
                   </div>
                   {/* Home indicator */}
-                  <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-[100px] h-[4px] bg-[hsl(0,0%,30%)] rounded-full" />
+                  <div className="absolute bottom-[10px] left-1/2 -translate-x-1/2 w-[110px] h-[4px] bg-[hsl(0,0%,35%)] rounded-full" />
                 </div>
               </div>
             </motion.div>
