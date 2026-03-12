@@ -129,7 +129,7 @@ const NewsKaleidoscope = () => {
           transition={{ duration: 0.6 }}
           className="mb-14 flex flex-col items-center text-center"
         >
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
             What's happening now?
           </h2>
         </motion.div>
