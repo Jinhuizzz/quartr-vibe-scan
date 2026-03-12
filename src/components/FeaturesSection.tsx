@@ -181,10 +181,6 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               className="relative md:col-span-2 flex flex-col gap-5"
             >
               <div>
-                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Auto-generated charts</p>
-                <MiraChartImage />
-              </div>
-              <div>
                 <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Valuation comparison</p>
                 <div className="surface-card overflow-hidden rounded-xl border border-border/30">
                   <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
