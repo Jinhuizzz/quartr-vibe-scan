@@ -205,17 +205,17 @@ const NewsKaleidoscope = () => {
               </motion.div>
             ) : (
               visibleCards.map((news, i) => {
-                const reverseIndex = visibleCards.length - 1 - i;
+                const stackIndex = visibleCards.length - 1 - i;
                 return (
                   <motion.div
                     key={news.id}
                     className="absolute inset-0"
-                    style={{ zIndex: visibleCards.length - i }}
+                    style={{ zIndex: i }}
                     initial={false}
                     animate={{
-                      scale: 1 - reverseIndex * 0.04,
-                      y: reverseIndex * 12,
-                      opacity: reverseIndex > 1 ? 0.5 : 1,
+                      scale: 1 - stackIndex * 0.05,
+                      y: stackIndex * 16,
+                      opacity: stackIndex > 1 ? 0.5 : 1,
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
