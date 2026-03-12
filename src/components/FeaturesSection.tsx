@@ -197,7 +197,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
     );
   }
 
-  // Report layout (03) — text overlay on top of full-width image
+  // Report layout (03) — image left, text right (reverse of 02)
   if (feature.visualType === "report") {
     return (
       <motion.div
@@ -207,43 +207,36 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
         transition={{ duration: 0.8 }}
         className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
       >
-        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-          {/* Compact text row */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+            {/* Left: image (7 cols) */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="md:col-span-7 relative"
             >
-              <span className="text-text-dim text-xs font-mono tracking-wider block mb-3">{feature.number}</span>
-              <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+              <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl pointer-events-none" />
+              <div className="relative surface-card overflow-hidden rounded-xl border border-border/30">
+                <img src={watchwiseResearch} alt="WatchWise Research reports" className="w-full h-auto" />
+              </div>
+            </motion.div>
+
+            {/* Right: text (5 cols) */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="md:col-span-5 space-y-5"
+            >
+              <span className="text-text-dim text-xs font-mono tracking-wider">{feature.number}</span>
+              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.1]">
                 {feature.title}
               </h3>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="md:max-w-sm md:text-right"
-            >
               <p className="text-text-secondary text-base leading-relaxed">{feature.description}</p>
-              <p className="text-text-dim text-sm italic mt-1">{feature.detail}</p>
+              <p className="text-text-dim text-sm italic">{feature.detail}</p>
             </motion.div>
           </div>
-
-          {/* Full-width image */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl pointer-events-none" />
-            <div className="relative surface-card overflow-hidden rounded-xl border border-border/30">
-              <img src={watchwiseResearch} alt="WatchWise Research reports" className="w-full h-auto" />
-            </div>
-          </motion.div>
         </div>
       </motion.div>
     );
