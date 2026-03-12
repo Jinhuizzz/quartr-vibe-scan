@@ -31,7 +31,7 @@ const CTASection = () => {
             <div className="grid md:grid-cols-2 gap-12 items-end">
               <div>
                 <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
-                  Have reliable
+                  Have confidence
                   <br />
                   in every
                   <br />
