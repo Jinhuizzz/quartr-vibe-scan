@@ -289,7 +289,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               transition={{ duration: 0.7, delay: 0.3 }}
               className="md:col-span-6 lg:col-span-5 flex justify-center"
             >
-              <div className="relative w-full max-w-[380px]">
+              <div className="relative w-full max-w-[340px]">
                 <div className="absolute -inset-8 bg-primary/5 rounded-[3rem] blur-3xl pointer-events-none" />
                 {/* iPhone-style frame */}
                 <div className="relative bg-[hsl(0,0%,2%)] rounded-[3.2rem] p-[12px] border-2 border-[hsl(0,0%,22%)] shadow-[0_25px_70px_-15px_hsl(215,60%,55%,0.15)]">
