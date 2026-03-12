@@ -63,7 +63,7 @@ const tagColors: Record<string, string> = {
 
 const CARD_COUNT = newsItems.length;
 const ANGLE_STEP = 360 / CARD_COUNT;
-const RADIUS = 260;
+const RADIUS = 220;
 const AUTO_ROTATE_INTERVAL = 3000;
 
 const NewsKaleidoscope = () => {
@@ -135,7 +135,7 @@ const NewsKaleidoscope = () => {
         {/* 3D Cylinder Carousel */}
         <div
           className="relative flex justify-center items-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
-          style={{ perspective: "900px", height: "400px", touchAction: "none" }}
+          style={{ perspective: "1200px", height: "440px", touchAction: "none" }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
