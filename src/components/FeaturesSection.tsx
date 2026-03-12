@@ -3,6 +3,7 @@ import { useRef } from "react";
 import miraBarChart from "@/assets/mira-bar-chart.png";
 import miraSandbox from "@/assets/mira-sandbox-process.png";
 import watchwiseResearch from "@/assets/watchwise-research.png";
+import agentChatDemo from "@/assets/agent-chat-dark.jpg";
 
 const features = [
   {
@@ -11,6 +12,7 @@ const features = [
     description: "The Era of the SuperAgent is here. Claim your personal Investment Agent, right now.",
     detail: "More than just a tool, your agent not only works, but also networks. Watch as it connects with other agents in real-time.",
     hasVisual: false,
+    visualType: "agent",
   },
   {
     number: "02",
@@ -244,6 +246,57 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               <img src={watchwiseResearch} alt="WatchWise Research reports" className="w-full h-auto" />
             </div>
           </motion.div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  // Agent layout (01) — text left, phone mockup right
+  if (feature.visualType === "agent") {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+            {/* Left: text */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="md:col-span-6 lg:col-span-7"
+            >
+              <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
+              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
+                {feature.title}
+              </h3>
+              <p className="text-text-secondary text-base leading-relaxed mb-2">
+                {feature.description}
+              </p>
+              <p className="text-text-dim text-sm italic">
+                {feature.detail}
+              </p>
+            </motion.div>
+
+            {/* Right: phone image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="md:col-span-6 lg:col-span-5 flex justify-center"
+            >
+              <div className="relative max-w-[280px] w-full">
+                <div className="absolute -inset-6 bg-primary/5 rounded-3xl blur-3xl pointer-events-none" />
+                <div className="relative rounded-2xl overflow-hidden border border-border/30 shadow-2xl shadow-primary/5">
+                  <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
     );
