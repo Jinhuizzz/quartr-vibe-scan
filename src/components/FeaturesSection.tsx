@@ -291,8 +291,14 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
             >
               <div className="relative max-w-[280px] w-full">
                 <div className="absolute -inset-6 bg-primary/5 rounded-3xl blur-3xl pointer-events-none" />
-                <div className="relative rounded-2xl overflow-hidden border border-border/30 shadow-2xl shadow-primary/5">
-                  <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto" />
+                {/* Phone frame */}
+                <div className="relative bg-[hsl(220,14%,8%)] rounded-[2.5rem] p-2.5 border-2 border-border/40 shadow-2xl shadow-primary/10">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[hsl(220,14%,8%)] rounded-b-2xl z-10" />
+                  {/* Screen */}
+                  <div className="relative rounded-[2rem] overflow-hidden bg-background">
+                    <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto" />
+                  </div>
                 </div>
               </div>
             </motion.div>
