@@ -15,7 +15,7 @@ const CTASection = () => {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 1 }}
-            className="absolute -top-16 md:-top-24 left-0 right-0 pointer-events-none select-none overflow-hidden"
+            className="absolute -top-16 md:-top-24 left-0 right-0 pointer-events-none select-none overflow-hidden text-center"
           >
             <span className="block font-display text-[clamp(5rem,15vw,14rem)] font-bold tracking-tighter leading-none outline-text-dim opacity-30">
               RELIABLE
@@ -31,7 +31,7 @@ const CTASection = () => {
             <div className="grid md:grid-cols-2 gap-12 items-end">
               <div>
                 <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
-                  Have reliable
+                  Have confidence
                   <br />
                   in every
                   <br />
