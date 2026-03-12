@@ -233,7 +233,7 @@ const NewsKaleidoscope = () => {
 
         {/* Bottom area */}
         {!allSwiped && (
-          <div className="flex flex-col items-center gap-4 mt-10">
+          <div className="flex items-center justify-between mt-10">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -245,9 +245,9 @@ const NewsKaleidoscope = () => {
             </motion.p>
             <a
               href="#"
-              className="glow-sm bg-primary hover:bg-primary/90 text-primary-foreground px-5 py-2 rounded-full text-sm font-medium transition-colors"
+              className="border border-foreground/20 hover:bg-foreground hover:text-background text-foreground px-5 py-2 rounded-full text-sm font-medium transition-colors"
             >
-              Try on App
+              Try on App →
             </a>
           </div>
         )}
