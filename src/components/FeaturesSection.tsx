@@ -32,9 +32,82 @@ const features = [
   },
 ];
 
+/* ---------- MIRA Chart Mockup ---------- */
+const MiraChartMockup = () => {
+  const bars = [
+    { label: "AAPL", value: 78, color: "bg-primary" },
+    { label: "MSFT", value: 65, color: "bg-primary/80" },
+    { label: "GOOGL", value: 52, color: "bg-primary/60" },
+    { label: "AMZN", value: 44, color: "bg-primary/50" },
+    { label: "NVDA", value: 91, color: "bg-primary" },
+  ];
+
+  return (
+    <div className="surface-card overflow-hidden rounded-xl border border-border/30 p-4 space-y-3">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 rounded-md bg-primary/20 flex items-center justify-center">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
+              <path d="M18 20V10M12 20V4M6 20v-6" />
+            </svg>
+          </div>
+          <span className="text-foreground text-xs font-semibold">Sector Performance</span>
+        </div>
+        <span className="text-text-dim text-[10px]">1D Change</span>
+      </div>
+
+      {/* Bar chart */}
+      <div className="space-y-2.5">
+        {bars.map((bar) => (
+          <div key={bar.label} className="flex items-center gap-3">
+            <span className="text-text-secondary text-[11px] font-mono w-10 shrink-0">{bar.label}</span>
+            <div className="flex-1 h-5 bg-surface rounded-sm overflow-hidden">
+              <div
+                className={`h-full ${bar.color} rounded-sm`}
+                style={{ width: `${bar.value}%` }}
+              />
+            </div>
+            <span className={`text-[10px] font-mono w-10 text-right ${bar.value > 60 ? 'text-primary' : 'text-text-secondary'}`}>
+              +{(bar.value / 10).toFixed(1)}%
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Mini line chart area */}
+      <div className="bg-surface/60 rounded-lg p-3 border border-border/20">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-foreground text-[11px] font-semibold">NVDA — 30D Trend</span>
+          <span className="text-primary text-[10px]">+12.4%</span>
+        </div>
+        {/* SVG sparkline */}
+        <svg viewBox="0 0 200 40" className="w-full h-8" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="hsl(217, 91%, 60%)" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="hsl(217, 91%, 60%)" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,35 L15,30 L30,32 L45,25 L60,28 L75,20 L90,22 L105,15 L120,18 L135,12 L150,14 L165,8 L180,10 L200,5"
+            fill="none"
+            stroke="hsl(217, 91%, 60%)"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M0,35 L15,30 L30,32 L45,25 L60,28 L75,20 L90,22 L105,15 L120,18 L135,12 L150,14 L165,8 L180,10 L200,5 L200,40 L0,40Z"
+            fill="url(#sparkFill)"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+};
+
 /* ---------- MIRA Chat Mockup ---------- */
 const MiraChatMockup = () => (
-  <div className="surface-card overflow-hidden glow-md rounded-xl border border-border/30">
+  <div className="surface-card overflow-hidden rounded-xl border border-border/30">
     {/* User message */}
     <div className="p-4 flex justify-end">
       <div className="bg-surface-elevated rounded-2xl rounded-br-sm px-4 py-2.5 max-w-[220px]">
@@ -65,43 +138,19 @@ const MiraChatMockup = () => (
       </div>
 
       {/* Content card */}
-      <div className="bg-surface/60 rounded-lg p-4 space-y-3 border border-border/20">
+      <div className="bg-surface/60 rounded-lg p-3 space-y-2 border border-border/20">
         <p className="text-text-dim text-[10px]">What's Happening Today — March 12, 2026</p>
-        <h4 className="text-foreground font-display font-bold text-sm">The Big Picture: A Tale of Two Stories</h4>
-        <p className="text-text-secondary text-xs leading-relaxed">
+        <h4 className="text-foreground font-display font-bold text-xs">The Big Picture: A Tale of Two Stories</h4>
+        <p className="text-text-secondary text-[11px] leading-relaxed">
           <span className="font-semibold text-foreground">Oracle (ORCL)</span> is riding high on blowout earnings while{" "}
           <span className="font-semibold text-foreground">broader markets are under pressure</span>.
         </p>
 
-        <div className="h-px bg-border/30 my-2" />
-
         {/* Stock highlight */}
         <div className="flex items-center gap-2">
-          <span className="text-amber-400 text-xs">◆</span>
-          <span className="text-foreground text-xs font-semibold">Oracle (ORCL)</span>
+          <span className="text-amber-400 text-[11px]">◆</span>
+          <span className="text-foreground text-[11px] font-semibold">Oracle (ORCL)</span>
           <span className="text-primary text-[10px]">+9.18%</span>
-        </div>
-
-        {/* Mini table */}
-        <div className="bg-background/50 rounded-md overflow-hidden text-[11px]">
-          <div className="grid grid-cols-2 border-b border-border/20 px-3 py-1.5">
-            <span className="text-text-dim font-medium">Current Price</span>
-            <span className="text-foreground">~$160.17</span>
-          </div>
-          <div className="grid grid-cols-2 px-3 py-1.5">
-            <span className="text-text-dim font-medium">Previous Close</span>
-            <span className="text-foreground">$163.12</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Input bar */}
-    <div className="px-4 pb-3">
-      <div className="flex items-center gap-2 bg-surface rounded-lg px-3 py-2">
-        <span className="text-text-dim text-xs flex-1">Ask MIRA anything...</span>
-        <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
-          <span className="text-primary-foreground text-xs">→</span>
         </div>
       </div>
     </div>
@@ -174,16 +223,25 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               </p>
             </motion.div>
 
-            {/* Right: chat mockup */}
+            {/* Right: two mockups stacked */}
             <motion.div
-              initial={{ opacity: 0, x: 30, rotateY: -5 }}
-              animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+              initial={{ opacity: 0, x: 30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.4 }}
-              className="relative"
+              className="relative space-y-6"
             >
               <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl" />
+              
+              {/* Chat mockup */}
               <div className="relative">
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">AI-powered conversational research</p>
                 <MiraChatMockup />
+              </div>
+
+              {/* Chart mockup */}
+              <div className="relative">
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
+                <MiraChartMockup />
               </div>
             </motion.div>
           </div>
