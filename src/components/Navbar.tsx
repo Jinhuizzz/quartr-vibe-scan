@@ -102,7 +102,7 @@ const Navbar = () => {
             onClick={() => setMobileOpen(false)}
             className="mt-2 text-center px-4 py-2.5 text-sm font-medium rounded-full bg-foreground text-background"
           >
-            Get Report
+            Download APP
           </Link>
         </motion.div>
       )}
