@@ -47,6 +47,21 @@ const ManifestoSection = () => {
             Our proprietary algorithms reason like a human analyst — at machine scale.
           </p>
         </motion.div>
+
+        {/* Download App Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="mt-16"
+        >
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
+          >
+            Download App
+          </a>
+        </motion.div>
       </div>
     </section>
   );
