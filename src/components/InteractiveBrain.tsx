@@ -52,7 +52,7 @@ function BrainModel() {
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 3.5 / maxDim;
+    const scale = 2.5 / maxDim;
     scene.scale.setScalar(scale);
     scene.position.sub(center.multiplyScalar(scale));
   }, [scene, viewport]);
