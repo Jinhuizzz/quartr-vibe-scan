@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import miraBarChart from "@/assets/mira-bar-chart.png";
 import miraSandbox from "@/assets/mira-sandbox-process.png";
+import watchwiseResearch from "@/assets/watchwise-research.png";
 
 const features = [
   {
