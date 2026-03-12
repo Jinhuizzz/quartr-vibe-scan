@@ -197,7 +197,58 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
     );
   }
 
-  return (
+  // Report layout (03) — text overlay on top of full-width image
+  if (feature.visualType === "report") {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+          {/* Compact text row */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <span className="text-text-dim text-xs font-mono tracking-wider block mb-3">{feature.number}</span>
+              <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+                {feature.title}
+              </h3>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="md:max-w-sm md:text-right"
+            >
+              <p className="text-text-secondary text-base leading-relaxed">{feature.description}</p>
+              <p className="text-text-dim text-sm italic mt-1">{feature.detail}</p>
+            </motion.div>
+          </div>
+
+          {/* Full-width image */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl pointer-events-none" />
+            <div className="relative surface-card overflow-hidden rounded-xl border border-border/30">
+              <img src={watchwiseResearch} alt="WatchWise Research reports" className="w-full h-auto" />
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    );
+  }
+
     <motion.div
       ref={ref}
       initial={{ opacity: 0 }}
