@@ -12,6 +12,7 @@ const features = [
     description: "The Era of the SuperAgent is here. Claim your personal Investment Agent, right now.",
     detail: "More than just a tool, your agent not only works, but also networks. Watch as it connects with other agents in real-time.",
     hasVisual: false,
+    visualType: "agent",
   },
   {
     number: "02",
