@@ -3,7 +3,6 @@ import HeroSection from "@/components/HeroSection";
 import NewsKaleidoscope from "@/components/NewsKaleidoscope";
 import ManifestoSection from "@/components/ManifestoSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import AgentSection from "@/components/AgentSection";
 import DataBrainSection from "@/components/DataBrainSection";
 import TickerBar from "@/components/TickerBar";
 import CTASection from "@/components/CTASection";
@@ -17,7 +16,6 @@ const Index = () => {
       <NewsKaleidoscope />
       <FeaturesSection />
       <ManifestoSection />
-      <AgentSection />
       <DataBrainSection />
       <CTASection />
       <TickerBar />

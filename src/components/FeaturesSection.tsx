@@ -4,18 +4,24 @@ import { useRef } from "react";
 const features = [
   {
     number: "01",
+    title: "Agent, at your command.",
+    description: "The Era of the SuperAgent is here. Claim your personal Investment Agent, powered by our proprietary OpenClaw Finance.",
+    detail: "More than just a tool, your agent not only works, but also networks. Watch as it connects with other agents in real-time.",
+  },
+  {
+    number: "02",
     title: "Deep Research",
     description: "Turn complex data into clear, visualized intelligence. From fragmented to structured — thematic and narrative.",
     detail: "Institutional-grade reports generated in seconds, not days.",
   },
   {
-    number: "02",
+    number: "03",
     title: "Ask MIRA",
     description: "Your AI trading assistant scans real-time data to uncover hidden risks and opportunities you might miss.",
     detail: "Watch MIRA think, analyze, and answer — fully transparent.",
   },
   {
-    number: "03",
+    number: "04",
     title: "Quantamental Loop",
     description: "Thesis. Risks. Valuation. The complete quantamental loop powered by Wall Street-grade algorithms.",
     detail: "Every insight traceable. Every conclusion verifiable.",
