@@ -25,7 +25,7 @@ const ManifestoSection = () => {
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.15, ease: [0.25, 0.1, 0, 1] }}
             >
-              <span className={`block font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] ${
+              <span className={`block font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] ${
                 i === words.length - 1 ? "text-gradient" : "text-foreground"
               }`}>
                 {word}
@@ -42,7 +42,7 @@ const ManifestoSection = () => {
           className="mt-12 md:mt-0 md:absolute md:right-12 lg:right-20 md:top-1/2 md:-translate-y-1/2 max-w-xs"
         >
           <div className="w-8 h-px bg-primary mb-4" />
-          <p className="text-text-secondary text-sm leading-relaxed">
+          <p className="text-text-secondary text-base leading-relaxed">
             Backed by Wall Street consultants with decades of quantamental experience.
             Our proprietary algorithms reason like a human analyst — at machine scale.
           </p>
