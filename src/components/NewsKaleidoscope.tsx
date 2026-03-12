@@ -136,8 +136,8 @@ const NewsKaleidoscope = () => {
 
         {/* 3D Cylinder Carousel */}
         <div
-          className="relative flex justify-center items-center select-none cursor-grab active:cursor-grabbing overflow-hidden"
-          style={{ perspective: "1200px", height: "440px", touchAction: "none" }}
+          className="relative flex justify-center items-center select-none cursor-grab active:cursor-grabbing"
+          style={{ perspective: "1200px", height: "460px", touchAction: "none" }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
@@ -147,8 +147,8 @@ const NewsKaleidoscope = () => {
           <motion.div
             className="relative"
             style={{
-              width: "220px",
-              height: "320px",
+              width: `${CARD_W}px`,
+              height: `${CARD_H}px`,
               transformStyle: "preserve-3d",
             }}
             animate={{ rotateY: rotation }}
@@ -156,14 +156,25 @@ const NewsKaleidoscope = () => {
           >
             {newsItems.map((news, i) => {
               const angle = i * ANGLE_STEP;
+              // Calculate how "front-facing" this card is
+              const normalizedRotation = ((rotation % 360) + 360) % 360;
+              const cardAngle = ((angle + normalizedRotation) % 360 + 360) % 360;
+              const distFromFront = Math.min(cardAngle, 360 - cardAngle);
+              const isFront = distFromFront < 25;
+              const scale = isFront ? 1.08 : 1 - distFromFront / 600;
+              const opacity = isFront ? 1 : Math.max(0.35, 1 - distFromFront / 180);
 
               return (
                 <div
                   key={news.id}
-                  className="absolute inset-0 w-[220px] h-[320px]"
+                  className={`absolute inset-0`}
                   style={{
-                    transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
+                    width: `${CARD_W}px`,
+                    height: `${CARD_H}px`,
+                    transform: `rotateY(${angle}deg) translateZ(${RADIUS}px) scale(${scale})`,
+                    opacity,
                     backfaceVisibility: "hidden",
+                    transition: "opacity 0.4s ease, transform 0.4s ease",
                   }}
                 >
                   <div className="surface-card h-full overflow-hidden rounded-xl">
