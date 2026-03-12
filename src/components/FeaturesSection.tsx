@@ -180,7 +180,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               transition={{ duration: 0.7, delay: 0.5 }}
               className="relative"
             >
-              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Valuation comparison</p>
+              
               <div className="surface-card overflow-hidden rounded-xl border border-border/30">
                 <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
               </div>
