@@ -168,7 +168,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               className="relative"
             >
               <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2">Auto-generated charts by MIRA</p>
-              <MiraChartMockup />
+              <MiraChartImage />
             </motion.div>
           </div>
         </div>
