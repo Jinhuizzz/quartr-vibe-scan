@@ -25,6 +25,7 @@ const features = [
     description: "From fragmented to structured — thematic and narrative.",
     detail: "Institutional-grade reports generated in seconds, not days.",
     hasVisual: false,
+    visualType: "report",
   },
   {
     number: "04",
