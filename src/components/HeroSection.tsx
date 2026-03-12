@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import InteractiveBrain from "@/components/InteractiveBrain";
 
@@ -24,7 +23,7 @@ const HeroSection = () => {
         >
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           <span className="text-text-dim text-xs uppercase tracking-[0.3em] font-mono">
-            AI-Powered Research Platform
+            The First Proactive AI Agent
           </span>
         </motion.div>
 
@@ -74,10 +73,9 @@ const HeroSection = () => {
           <div className="flex items-center gap-3 pointer-events-auto">
             <Link
               to="/research"
-              className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-all"
+              className="inline-flex items-center px-7 py-3.5 rounded-full bg-foreground text-background font-bold text-sm hover:bg-foreground/90 transition-all"
             >
               Try Now
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </motion.div>
