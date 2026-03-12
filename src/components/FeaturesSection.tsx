@@ -222,7 +222,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
             transition={{ duration: 0.6, delay: 0.2 }}
             className={`md:col-span-5 ${isEven ? '' : 'md:order-1'}`}
           >
-            <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground group-hover:text-gradient-warm transition-all duration-500">
+            <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-foreground">
               {feature.title}
             </h3>
           </motion.div>
