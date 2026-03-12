@@ -155,29 +155,31 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
           <div className="relative">
             <div className="absolute -inset-6 bg-primary/5 rounded-3xl blur-3xl pointer-events-none" />
 
-            {/* Chat mockup */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative mb-6"
-            >
-              <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Conversational research</p>
-              <MiraChatMockup />
-            </motion.div>
+            <div className="grid md:grid-cols-2 gap-6 relative">
+              {/* Chat mockup */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="relative"
+              >
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Conversational research</p>
+                <MiraChatMockup />
+              </motion.div>
 
-            {/* Bar chart - full width */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="relative"
-            >
-              
-              <div className="surface-card overflow-hidden rounded-xl border border-border/30">
-                <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
-              </div>
-            </motion.div>
+              {/* Bar chart */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                className="relative"
+              >
+                <p className="text-text-dim text-[10px] uppercase tracking-[0.2em] font-mono mb-2.5">Auto-generated charts</p>
+                <div className="surface-card overflow-hidden rounded-xl border border-border/30">
+                  <img src={miraBarChart} alt="MIRA normalized bar chart" className="w-full h-auto" />
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </motion.div>
