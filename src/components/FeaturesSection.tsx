@@ -23,7 +23,7 @@ const features = [
     number: "03",
     title: "Wall Street-grade report",
     description: "From fragmented to structured — thematic and narrative. Forsee the market trends before it reacts.",
-    detail: "Institutional-grade reports generated in seconds, not days.",
+    detail: "Generated in seconds, not days.",
     hasVisual: false,
     visualType: "report",
   },
