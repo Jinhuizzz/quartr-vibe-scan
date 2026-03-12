@@ -1,6 +1,5 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CTASection = () => {
@@ -19,7 +18,7 @@ const CTASection = () => {
             className="absolute -top-16 md:-top-24 left-0 right-0 pointer-events-none select-none overflow-hidden"
           >
             <span className="block font-display text-[clamp(5rem,15vw,14rem)] font-bold tracking-tighter leading-none outline-text-dim opacity-30">
-              CONFIDENCE
+              RELIABLE
             </span>
           </motion.div>
 
@@ -32,7 +31,7 @@ const CTASection = () => {
             <div className="grid md:grid-cols-2 gap-12 items-end">
               <div>
                 <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-6">
-                  Have confidence
+                  Have reliable
                   <br />
                   in every
                   <br />
@@ -47,10 +46,9 @@ const CTASection = () => {
                 <div>
                   <Link
                     to="/research"
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-medium hover:bg-foreground/90 transition-all glow-sm"
+                    className="inline-flex items-center px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
                   >
                     Get Started Free
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
