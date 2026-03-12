@@ -17,7 +17,7 @@ const features = [
   {
     number: "03",
     title: "Wall Street-grade report",
-    description: "Turn complex data into clear, visualized intelligence. From fragmented to structured — thematic and narrative.",
+    description: "From fragmented to structured — thematic and narrative.",
     detail: "Institutional-grade reports generated in seconds, not days.",
   },
   {
