@@ -23,7 +23,7 @@ const HeroSection = () => {
         >
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           <span className="text-text-dim text-xs uppercase tracking-[0.3em] font-mono">
-            AI-Powered Research Platform
+            The First Proactive AI Agent
           </span>
         </motion.div>
 
