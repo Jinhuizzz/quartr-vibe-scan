@@ -48,12 +48,13 @@ const UpcomingSection = () => {
 
             {/* "UPCOMING" curved along top arc — matching section label style */}
             <svg
-              viewBox="0 0 500 280"
-              className="absolute w-[500px] h-[280px] pointer-events-none z-20"
-              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)', marginTop: '-110px' }}
+              viewBox="0 0 520 520"
+              className="absolute w-[520px] h-[520px] pointer-events-none z-20"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 15,260 A 235,235 0 0,1 485,260" />
+                {/* Arc with radius 250, centered at 260,260 — sits just outside the 440px ring */}
+                <path id="upcomingArc" d="M 10,260 A 250,250 0 0,1 510,260" />
               </defs>
               <text
                 fontSize="28"
