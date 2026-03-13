@@ -46,18 +46,18 @@ const UpcomingSection = () => {
         <div className="flex justify-center">
           <div className="relative">
 
-            {/* "UPCOMING" text curved along the outer ring — static */}
+            {/* "UPCOMING" curved text — top half arc only */}
             <svg
-              viewBox="0 0 440 440"
-              className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px] pointer-events-none"
+              viewBox="0 0 360 360"
+              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] pointer-events-none"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 220,220 m -195,0 a 195,195 0 1,1 390,0 a 195,195 0 1,1 -390,0" />
+                <path id="upcomingArc" d="M 20,180 A 160,160 0 0,1 340,180" />
               </defs>
-              <text fill="hsl(var(--text-dim))" fontSize="11" fontFamily="monospace" letterSpacing="8" opacity="0.5">
-                <textPath href="#upcomingArc" startOffset="12%">
-                  UPCOMING · UPCOMING · UPCOMING · UPCOMING ·
+              <text fill="hsl(var(--text-dim))" fontSize="14" fontFamily="monospace" letterSpacing="12" opacity="0.7">
+                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle">
+                  UPCOMING
                 </textPath>
               </text>
             </svg>
