@@ -101,13 +101,13 @@ const UpcomingSection = () => {
 
             {/* Middle static ring - dashed circle */}
             <div
-              className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-border/30"
+              className="absolute w-[380px] h-[380px] rounded-full border border-dashed border-border/30"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
             {/* Inner glowing ring */}
             <div
-              className="absolute w-[230px] h-[230px] rounded-full"
+              className="absolute w-[330px] h-[330px] rounded-full"
               style={{
                 left: '50%',
                 top: '50%',
@@ -116,7 +116,7 @@ const UpcomingSection = () => {
               }}
             />
             <div
-              className="absolute w-[230px] h-[230px] rounded-full border border-primary/20"
+              className="absolute w-[330px] h-[330px] rounded-full border border-primary/20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
@@ -124,7 +124,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[230px] h-[230px]"
+              className="absolute w-[330px] h-[330px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_4px_hsl(var(--primary)/0.5)]" />
@@ -134,7 +134,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[200px] h-[200px] rounded-full bg-primary/10 blur-xl"
+              className="absolute w-[260px] h-[260px] rounded-full bg-primary/10 blur-xl"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
