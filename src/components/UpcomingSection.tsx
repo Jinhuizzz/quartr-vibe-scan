@@ -133,7 +133,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[160px] h-[160px] md:w-[210px] md:h-[210px] rounded-full bg-primary/10 blur-xl"
+              className="absolute w-[210px] h-[210px] rounded-full bg-primary/10 blur-xl"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
