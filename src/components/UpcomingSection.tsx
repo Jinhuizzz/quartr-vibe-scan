@@ -113,7 +113,7 @@ const UpcomingSection = () => {
               }}
             />
             <div
-              className="absolute w-[270px] h-[270px] rounded-full border border-primary/20"
+              className="absolute w-[330px] h-[330px] rounded-full border border-primary/20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
