@@ -44,7 +44,7 @@ const UpcomingSection = () => {
 
         {/* Circular orbit container — scaled down */}
         <div className="flex justify-center">
-          <div className="relative scale-[0.72] md:scale-[0.8] origin-center">
+          <div className="relative scale-[0.85] md:scale-100 origin-center">
 
             {/* "UPCOMING" curved along top arc — matching section label style */}
             <svg
