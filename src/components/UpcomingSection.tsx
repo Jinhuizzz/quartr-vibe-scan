@@ -61,7 +61,7 @@ const UpcomingSection = () => {
                 fontSize="26"
                 fontFamily="'Space Grotesk', sans-serif"
                 fontWeight="700"
-                letterSpacing="16"
+                letterSpacing="26"
                 textRendering="optimizeLegibility"
                 dominantBaseline="ideographic"
               >
