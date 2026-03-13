@@ -136,7 +136,7 @@ const UpcomingSection = () => {
             />
 
             {/* Center content */}
-            <div className="relative w-[360px] h-[360px] flex items-center justify-center">
+            <div className="relative w-[440px] h-[440px] flex items-center justify-center">
               <div className="flex flex-col items-center text-center z-10">
                 {/* Logo + title */}
                 <motion.div
