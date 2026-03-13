@@ -1,11 +1,29 @@
-import { motion, useInView } from "framer-motion";
-import { Bot } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Bot, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import miraBarChart from "@/assets/mira-bar-chart.png";
 import miraSandbox from "@/assets/mira-sandbox-process.png";
 import watchwiseResearch from "@/assets/watchwise-research.png";
-import agentChatDemo from "@/assets/agent-chat-demo.jpg";
+
+const agentTabs = [
+  {
+    label: "播客整理成投资报告",
+    placeholder: "粘贴播客链接，Agent 帮你整理成投资报告...",
+  },
+  {
+    label: "分析师评级变动追踪",
+    placeholder: "输入股票代码，追踪分析师评级变动...",
+  },
+  {
+    label: "定时任务推送",
+    placeholder: "设定你的推送规则，如 每天早8点推送科技股异动...",
+  },
+  {
+    label: "和其他 Agent 聊天",
+    placeholder: "向其他人的 Agent 发起对话...",
+  },
+];
 
 const features = [
   {
@@ -83,6 +101,112 @@ const MiraChatMockup = () => (
     </div>
   </div>
 );
+
+/* ---------- Agent Section (01) ---------- */
+import React from "react";
+
+const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features[0]; inView: boolean }>(
+  ({ feature, inView }, ref) => {
+    const [activeTab, setActiveTab] = useState(0);
+    const [inputValue, setInputValue] = useState("");
+
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
+          {/* Top: text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-10"
+          >
+            <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
+            <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-4">
+              {feature.title}
+            </h3>
+            <p className="text-text-secondary text-base leading-relaxed max-w-2xl">
+              {feature.description}
+            </p>
+          </motion.div>
+
+          {/* Tab slider */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-6"
+          >
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+              {agentTabs.map((tab, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActiveTab(i); setInputValue(""); }}
+                  className={`relative whitespace-nowrap px-4 py-2 text-sm rounded-full border transition-all duration-300 shrink-0 ${
+                    activeTab === i
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-transparent text-text-secondary border-border/50 hover:border-text-dim"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Chat input area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="surface-card p-4 rounded-xl"
+              >
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder={agentTabs[activeTab].placeholder}
+                    className="flex-1 bg-transparent text-foreground text-sm placeholder:text-text-dim outline-none"
+                  />
+                  <button className="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-primary/80 transition-colors">
+                    <Send size={14} className="text-primary-foreground" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+
+          {/* CTA Button at bottom */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex justify-center mt-10"
+          >
+            <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
+              Build your Agent Team
+            </a>
+          </motion.div>
+        </div>
+      </motion.div>
+    );
+  }
+);
+AgentSection.displayName = "AgentSection";
 
 const FeaturesSection = () => {
   return (
@@ -268,73 +392,9 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
     );
   }
 
-  // Agent layout (01) — text left, phone mockup right
+  // Agent layout (01) — text top, swipeable tabs with chat input, button at bottom
   if (feature.visualType === "agent") {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8 }}
-        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
-      >
-        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
-          <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
-            {/* Left: text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="md:col-span-6 lg:col-span-7"
-            >
-              <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
-              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
-                {feature.title}
-              </h3>
-              <p className="text-text-secondary text-base leading-relaxed mb-2">
-                {feature.description}
-              </p>
-              <p className="text-text-dim text-sm italic">
-                {feature.detail}
-              </p>
-              <a href="#" className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors w-fit">Build your Agent Team</a>
-            </motion.div>
-
-            {/* Right: phone image */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="md:col-span-6 lg:col-span-5 flex justify-center"
-            >
-              <div className="relative w-full max-w-[280px]">
-                <div className="absolute -inset-8 bg-primary/5 rounded-[3rem] blur-3xl pointer-events-none" />
-                {/* iPhone-style frame */}
-                <div className="relative bg-[hsl(0,0%,2%)] rounded-[2.8rem] p-[10px] border-2 border-[hsl(0,0%,22%)] shadow-[0_25px_70px_-15px_hsl(215,60%,55%,0.15)]">
-                  {/* Side buttons - left */}
-                  <div className="absolute left-[-3px] top-[100px] w-[3px] h-[28px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
-                  <div className="absolute left-[-3px] top-[142px] w-[3px] h-[48px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
-                  <div className="absolute left-[-3px] top-[200px] w-[3px] h-[48px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
-                  {/* Side button - right */}
-                  <div className="absolute right-[-3px] top-[155px] w-[3px] h-[60px] bg-[hsl(0,0%,20%)] rounded-r-sm" />
-                  {/* Dynamic Island - smaller to avoid text overlap */}
-                  <div className="absolute top-[18px] left-1/2 -translate-x-1/2 w-[80px] h-[24px] bg-[hsl(0,0%,0%)] rounded-full z-10" />
-                  {/* Screen */}
-                  <div className="relative rounded-[2.2rem] overflow-hidden bg-[hsl(0,0%,0%)]">
-                    <div className="h-[28px] bg-[hsl(0,0%,0%)]" />
-                    <div className="relative">
-                      <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto block brightness-[0.7]" />
-                    </div>
-                  </div>
-                  {/* Home indicator */}
-                  <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-[90px] h-[4px] bg-[hsl(0,0%,35%)] rounded-full" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-    );
+    return <AgentSection feature={feature} ref={ref} inView={inView} />;
   }
 
   return (
