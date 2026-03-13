@@ -74,7 +74,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
+              className="absolute w-[360px] h-[360px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <svg viewBox="0 0 360 360" className="w-full h-full">
