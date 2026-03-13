@@ -53,13 +53,13 @@ const UpcomingSection = () => {
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 30,220 A 190,190 0 0,1 410,220" />
+                <path id="upcomingArc" d="M 10,220 A 210,210 0 0,1 430,220" />
               </defs>
               <text
                 fontSize="28"
                 fontFamily="'Space Grotesk', sans-serif"
                 fontWeight="700"
-                letterSpacing="8"
+                letterSpacing="18"
                 textRendering="optimizeLegibility"
               >
                 <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--foreground))">
