@@ -162,7 +162,7 @@ const NewsKaleidoscope = () => {
               const distFromFront = Math.min(cardAngle, 360 - cardAngle);
               const isFront = distFromFront < 25;
               const scale = isFront ? 1.08 : 1 - distFromFront / 600;
-              const opacity = isFront ? 1 : Math.max(0.35, 1 - distFromFront / 180);
+              const opacity = isFront ? 1 : Math.max(0.12, 1 - distFromFront / 100);
 
               return (
                 <div
