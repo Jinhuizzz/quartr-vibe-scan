@@ -150,7 +150,7 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-6"
           >
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <div className="flex flex-wrap gap-2 justify-center pb-2">
               {agentTabs.map((tab, i) => (
                 <button
                   key={i}
