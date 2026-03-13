@@ -101,7 +101,7 @@ const UpcomingSection = () => {
 
             {/* Middle static ring - dashed circle */}
             <div
-              className="absolute w-[380px] h-[380px] rounded-full border border-dashed border-border/30"
+              className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-border/30"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
