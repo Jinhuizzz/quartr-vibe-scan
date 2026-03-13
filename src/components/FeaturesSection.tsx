@@ -274,6 +274,7 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               <p className="text-text-dim text-sm italic">
                 {feature.detail}
               </p>
+              <Button className="mt-6 w-fit px-5 py-2.5">Build your Agent Team</Button>
             </motion.div>
 
             {/* Right: phone image */}
