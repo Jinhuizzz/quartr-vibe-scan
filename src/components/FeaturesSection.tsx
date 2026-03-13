@@ -202,7 +202,7 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
             className="flex justify-center mt-10"
           >
             <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
-              Build your Agent Team
+              Unlock more
             </a>
           </motion.div>
         </div>
