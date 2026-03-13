@@ -124,13 +124,13 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-10"
+            className="mb-10 text-center"
           >
             <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
             <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-4">
               {feature.title}
             </h3>
-            <p className="text-text-secondary text-base leading-relaxed max-w-2xl">
+            <p className="text-text-secondary text-base leading-relaxed max-w-2xl mx-auto">
               {feature.description}
             </p>
           </motion.div>
