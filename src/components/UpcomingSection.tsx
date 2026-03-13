@@ -101,7 +101,7 @@ const UpcomingSection = () => {
 
             {/* Middle static ring - dashed circle */}
             <div
-              className="absolute w-[380px] h-[380px] rounded-full border border-dashed border-border/30"
+              className="absolute w-[300px] h-[300px] rounded-full border border-dashed border-border/30"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
@@ -134,7 +134,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[260px] h-[260px] rounded-full bg-primary/10 blur-xl"
+              className="absolute w-[200px] h-[200px] rounded-full bg-primary/10 blur-xl"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
