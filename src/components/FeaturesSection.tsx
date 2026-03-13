@@ -176,7 +176,7 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="surface-card p-4 rounded-xl"
+                className="surface-card p-5 rounded-xl"
               >
                 <div className="flex items-center gap-3">
                   <input
@@ -184,10 +184,10 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder={agentTabs[activeTab].placeholder}
-                    className="flex-1 bg-transparent text-foreground text-sm placeholder:text-text-dim outline-none"
+                    className="flex-1 bg-transparent text-foreground text-base placeholder:text-text-dim outline-none py-2"
                   />
-                  <button className="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-primary/80 transition-colors">
-                    <Send size={14} className="text-primary-foreground" />
+                  <button className="shrink-0 px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/80 transition-colors">
+                    Start
                   </button>
                 </div>
               </motion.div>
@@ -202,7 +202,7 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
             className="flex justify-center mt-10"
           >
             <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
-              Build your Agent Team
+              Unlock more
             </a>
           </motion.div>
         </div>
