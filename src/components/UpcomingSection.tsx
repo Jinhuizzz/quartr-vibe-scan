@@ -39,25 +39,25 @@ const UpcomingSection = () => {
   const ticks = Array.from({ length: 60 }, (_, i) => i);
 
   return (
-    <section className="relative py-12 md:py-20">
+    <section className="relative py-8 md:py-14">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
 
         {/* Circular orbit container */}
         <div className="flex justify-center">
           <div className="relative">
 
-            {/* "UPCOMING" text curved along the outer ring — static */}
+            {/* "UPCOMING" curved text — top half arc only */}
             <svg
-              viewBox="0 0 440 440"
-              className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px] pointer-events-none"
+              viewBox="0 0 360 360"
+              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] pointer-events-none"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 220,220 m -195,0 a 195,195 0 1,1 390,0 a 195,195 0 1,1 -390,0" />
+                <path id="upcomingArc" d="M 20,180 A 160,160 0 0,1 340,180" />
               </defs>
-              <text fill="hsl(var(--text-dim))" fontSize="11" fontFamily="monospace" letterSpacing="8" opacity="0.5">
-                <textPath href="#upcomingArc" startOffset="12%">
-                  UPCOMING · UPCOMING · UPCOMING · UPCOMING ·
+              <text fill="hsl(var(--text-dim))" fontSize="14" fontFamily="monospace" letterSpacing="12" opacity="0.7">
+                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle">
+                  UPCOMING
                 </textPath>
               </text>
             </svg>
@@ -66,21 +66,21 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px]"
+              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
-              <svg viewBox="0 0 440 440" className="w-full h-full">
+              <svg viewBox="0 0 360 360" className="w-full h-full">
                 {ticks.map((i) => {
                   const angle = (i * 6 - 90) * (Math.PI / 180);
-                  const r1 = 216;
-                  const r2 = i % 5 === 0 ? 205 : 210;
+                  const r1 = 176;
+                  const r2 = i % 5 === 0 ? 167 : 171;
                   return (
                     <line
                       key={i}
-                      x1={220 + r1 * Math.cos(angle)}
-                      y1={220 + r1 * Math.sin(angle)}
-                      x2={220 + r2 * Math.cos(angle)}
-                      y2={220 + r2 * Math.sin(angle)}
+                      x1={180 + r1 * Math.cos(angle)}
+                      y1={180 + r1 * Math.sin(angle)}
+                      x2={180 + r2 * Math.cos(angle)}
+                      y2={180 + r2 * Math.sin(angle)}
                       stroke={`hsl(var(--text-dim))`}
                       strokeWidth={i % 5 === 0 ? 1.5 : 0.8}
                       opacity={i % 5 === 0 ? 0.6 : 0.25}
@@ -92,13 +92,13 @@ const UpcomingSection = () => {
 
             {/* Middle static ring - dashed circle */}
             <div
-              className="absolute w-[300px] h-[300px] md:w-[390px] md:h-[390px] rounded-full border border-dashed border-border/30"
+              className="absolute w-[240px] h-[240px] md:w-[310px] md:h-[310px] rounded-full border border-dashed border-border/30"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
             {/* Inner glowing ring */}
             <div
-              className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full"
+              className="absolute w-[200px] h-[200px] md:w-[270px] md:h-[270px] rounded-full"
               style={{
                 left: '50%',
                 top: '50%',
@@ -107,7 +107,7 @@ const UpcomingSection = () => {
               }}
             />
             <div
-              className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-primary/20"
+              className="absolute w-[200px] h-[200px] md:w-[270px] md:h-[270px] rounded-full border border-primary/20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
@@ -115,7 +115,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px]"
+              className="absolute w-[200px] h-[200px] md:w-[270px] md:h-[270px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_4px_hsl(var(--primary)/0.5)]" />
@@ -125,12 +125,12 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[200px] h-[200px] md:w-[260px] md:h-[260px] rounded-full bg-primary/10 blur-xl"
+              className="absolute w-[160px] h-[160px] md:w-[210px] md:h-[210px] rounded-full bg-primary/10 blur-xl"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
             {/* Center content */}
-            <div className="relative w-[340px] h-[340px] md:w-[440px] md:h-[440px] flex items-center justify-center">
+            <div className="relative w-[280px] h-[280px] md:w-[360px] md:h-[360px] flex items-center justify-center">
               <div className="flex flex-col items-center text-center z-10">
                 {/* Logo + title */}
                 <motion.div
