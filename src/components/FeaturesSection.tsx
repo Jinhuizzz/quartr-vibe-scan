@@ -251,6 +251,18 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               <img src={watchwiseResearch} alt="WatchWise Research reports" className="w-full h-auto" />
             </div>
           </motion.div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex justify-center mt-10"
+          >
+            <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
+              Get the report at your fingertips
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     );
