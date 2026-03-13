@@ -69,7 +69,7 @@ const UpcomingSection = () => {
               className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
-              <svg viewBox="0 0 440 440" className="w-full h-full">
+              <svg viewBox="0 0 360 360" className="w-full h-full">
                 {ticks.map((i) => {
                   const angle = (i * 6 - 90) * (Math.PI / 180);
                   const r1 = 216;
