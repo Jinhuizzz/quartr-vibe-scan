@@ -72,15 +72,15 @@ const UpcomingSection = () => {
               <svg viewBox="0 0 360 360" className="w-full h-full">
                 {ticks.map((i) => {
                   const angle = (i * 6 - 90) * (Math.PI / 180);
-                  const r1 = 216;
-                  const r2 = i % 5 === 0 ? 205 : 210;
+                  const r1 = 176;
+                  const r2 = i % 5 === 0 ? 167 : 171;
                   return (
                     <line
                       key={i}
-                      x1={220 + r1 * Math.cos(angle)}
-                      y1={220 + r1 * Math.sin(angle)}
-                      x2={220 + r2 * Math.cos(angle)}
-                      y2={220 + r2 * Math.sin(angle)}
+                      x1={180 + r1 * Math.cos(angle)}
+                      y1={180 + r1 * Math.sin(angle)}
+                      x2={180 + r2 * Math.cos(angle)}
+                      y2={180 + r2 * Math.sin(angle)}
                       stroke={`hsl(var(--text-dim))`}
                       strokeWidth={i % 5 === 0 ? 1.5 : 0.8}
                       opacity={i % 5 === 0 ? 0.6 : 0.25}
