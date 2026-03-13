@@ -48,26 +48,24 @@ const UpcomingSection = () => {
 
             {/* "UPCOMING" curved along top arc — matching section label style */}
             <svg
-              viewBox="0 0 360 360"
-              className="absolute w-[360px] h-[360px] pointer-events-none z-20"
+              viewBox="0 0 440 440"
+              className="absolute w-[440px] h-[440px] pointer-events-none z-20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 28,180 A 152,152 0 0,1 332,180" />
+                <path id="upcomingArc" d="M 30,220 A 190,190 0 0,1 410,220" />
               </defs>
               <text
-                fontSize="10"
-                fontFamily="'Space Grotesk', monospace"
-                letterSpacing="6"
+                fontSize="28"
+                fontFamily="'Space Grotesk', sans-serif"
+                fontWeight="700"
+                letterSpacing="8"
                 textRendering="optimizeLegibility"
               >
-                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--text-dim))">
+                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--foreground))">
                   UPCOMING
                 </textPath>
               </text>
-              {/* Small decorative lines on both ends of the arc */}
-              <line x1="45" y1="175" x2="120" y2="175" stroke="hsl(var(--border) / 0.3)" strokeWidth="1" />
-              <line x1="240" y1="175" x2="315" y2="175" stroke="hsl(var(--border) / 0.3)" strokeWidth="1" />
             </svg>
 
             {/* Outer rotating ring with ticks */}
