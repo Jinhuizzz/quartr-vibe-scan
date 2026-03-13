@@ -9,19 +9,19 @@ import watchwiseResearch from "@/assets/watchwise-research.png";
 const agentTabs = [
   {
     label: "播客整理成投资报告",
-    placeholder: "粘贴播客链接，Agent 帮你整理成投资报告...",
+    placeholder: "Paste a podcast link, your Agent turns it into an investment report...",
   },
   {
     label: "分析师评级变动追踪",
-    placeholder: "输入股票代码，追踪分析师评级变动...",
+    placeholder: "Enter a ticker to track analyst rating changes...",
   },
   {
     label: "定时任务推送",
-    placeholder: "设定你的推送规则，如 每天早8点推送科技股异动...",
+    placeholder: "Set your push rules, e.g. 'Push tech stock movers every morning at 8am'...",
   },
   {
     label: "和其他 Agent 聊天",
-    placeholder: "向其他人的 Agent 发起对话...",
+    placeholder: "Start a conversation with someone else's Agent...",
   },
 ];
 
@@ -124,13 +124,13 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-10"
+            className="mb-10 text-center"
           >
             <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
             <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-4">
               {feature.title}
             </h3>
-            <p className="text-text-secondary text-base leading-relaxed max-w-2xl">
+            <p className="text-text-secondary text-base leading-relaxed max-w-2xl mx-auto">
               {feature.description}
             </p>
           </motion.div>
