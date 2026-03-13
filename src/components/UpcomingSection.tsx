@@ -24,6 +24,10 @@ const UpcomingSection = () => {
     return () => clearInterval(id);
   }, []);
 
+  const totalSeconds = BABA_EARNINGS_DATE.getTime() / 1000;
+  const nowSeconds = Date.now() / 1000;
+  const progress = Math.min(1, Math.max(0, 1 - (totalSeconds - nowSeconds) / (30 * 24 * 3600)));
+
   const units = [
     { value: timeLeft.days, label: "DAYS" },
     { value: timeLeft.hours, label: "HRS" },
@@ -31,81 +35,151 @@ const UpcomingSection = () => {
     { value: timeLeft.seconds, label: "SEC" },
   ];
 
+  // Generate tick marks for the outer ring
+  const ticks = Array.from({ length: 60 }, (_, i) => i);
+
   return (
-    <section className="relative py-12 md:py-16">
+    <section className="relative py-12 md:py-20">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-10">
           <span className="text-text-dim text-xs uppercase tracking-[0.3em] font-mono">Upcoming</span>
           <div className="flex-1 h-px bg-border/30" />
         </div>
 
-        <div className="max-w-xl mx-auto border border-border/40 rounded-2xl bg-surface/50 backdrop-blur-sm px-8 py-10 md:px-12 md:py-12">
-          <div className="flex flex-col items-center text-center">
-            {/* Event title with Alibaba logo */}
+        {/* Circular orbit container */}
+        <div className="flex justify-center">
+          <div className="relative">
+            {/* Outer rotating ring with ticks */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-6"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 m-auto w-[340px] h-[340px] md:w-[440px] md:h-[440px]"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
-              <img src={alibabaLogo} alt="Alibaba" className="w-7 h-7 object-contain shrink-0" />
-              <span className="text-text-secondary text-sm md:text-base font-mono uppercase tracking-wider">
-                BABA Earnings Report
-              </span>
+              <svg viewBox="0 0 440 440" className="w-full h-full">
+                {ticks.map((i) => {
+                  const angle = (i * 6 - 90) * (Math.PI / 180);
+                  const r1 = 216;
+                  const r2 = i % 5 === 0 ? 205 : 210;
+                  return (
+                    <line
+                      key={i}
+                      x1={220 + r1 * Math.cos(angle)}
+                      y1={220 + r1 * Math.sin(angle)}
+                      x2={220 + r2 * Math.cos(angle)}
+                      y2={220 + r2 * Math.sin(angle)}
+                      stroke={`hsl(var(--text-dim))`}
+                      strokeWidth={i % 5 === 0 ? 1.5 : 0.8}
+                      opacity={i % 5 === 0 ? 0.6 : 0.25}
+                    />
+                  );
+                })}
+              </svg>
             </motion.div>
 
-            {/* Countdown */}
+            {/* Middle static ring - dashed circle */}
+            <div
+              className="absolute w-[300px] h-[300px] md:w-[390px] md:h-[390px] rounded-full border border-dashed border-border/30"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+            />
+
+            {/* Inner glowing ring */}
+            <div
+              className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full"
+              style={{
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                background: `conic-gradient(from 0deg, hsl(var(--primary) / 0.15) 0%, hsl(var(--primary) / 0.03) 30%, transparent 60%)`,
+              }}
+            />
+            <div
+              className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-primary/20"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+            />
+
+            {/* Orbiting dot */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex items-center gap-2 md:gap-3 mb-6"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px]"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
-              {units.map((unit, i) => (
-                <div key={unit.label} className="flex items-center gap-2 md:gap-3">
-                  <div className="flex flex-col items-center">
-                    {/* Flip card */}
-                    <div className="relative w-14 h-16 md:w-18 md:h-22 rounded-lg overflow-hidden">
-                      <div className="absolute inset-0 bottom-1/2 bg-surface-elevated border border-border/40 rounded-t-lg flex items-end justify-center">
-                        <span className="font-display text-xl md:text-3xl font-bold text-foreground translate-y-1/2">
-                          {String(unit.value).padStart(2, "0")}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_4px_hsl(var(--primary)/0.5)]" />
+            </motion.div>
+
+            {/* Pulsing glow behind center */}
+            <motion.div
+              animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute w-[200px] h-[200px] md:w-[260px] md:h-[260px] rounded-full bg-primary/10 blur-xl"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+            />
+
+            {/* Center content */}
+            <div className="relative w-[340px] h-[340px] md:w-[440px] md:h-[440px] flex items-center justify-center">
+              <div className="flex flex-col items-center text-center z-10">
+                {/* Logo + title */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-2 mb-5"
+                >
+                  <img src={alibabaLogo} alt="Alibaba" className="w-6 h-6 object-contain" />
+                  <span className="text-text-secondary text-xs md:text-sm font-mono uppercase tracking-wider">
+                    BABA Earnings
+                  </span>
+                </motion.div>
+
+                {/* Countdown digits */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-1.5 md:gap-2 mb-5"
+                >
+                  {units.map((unit, i) => (
+                    <div key={unit.label} className="flex items-center gap-1.5 md:gap-2">
+                      <div className="flex flex-col items-center">
+                        <div className="relative w-11 h-13 md:w-14 md:h-16 rounded-md overflow-hidden">
+                          <div className="absolute inset-0 bottom-1/2 bg-surface-elevated border border-border/40 rounded-t-md flex items-end justify-center">
+                            <span className="font-display text-base md:text-xl font-bold text-foreground translate-y-1/2">
+                              {String(unit.value).padStart(2, "0")}
+                            </span>
+                          </div>
+                          <div className="absolute inset-0 top-1/2 bg-surface border border-border/30 border-t-0 rounded-b-md flex items-start justify-center overflow-hidden">
+                            <span className="font-display text-base md:text-xl font-bold text-foreground -translate-y-1/2">
+                              {String(unit.value).padStart(2, "0")}
+                            </span>
+                          </div>
+                          <div className="absolute left-0 right-0 top-1/2 -translate-y-px h-[1.5px] bg-background/80 z-10" />
+                        </div>
+                        <span className="text-text-dim text-[8px] md:text-[10px] font-mono tracking-wider mt-1">
+                          {unit.label}
                         </span>
                       </div>
-                      <div className="absolute inset-0 top-1/2 bg-surface border border-border/30 border-t-0 rounded-b-lg flex items-start justify-center overflow-hidden">
-                        <span className="font-display text-xl md:text-3xl font-bold text-foreground -translate-y-1/2">
-                          {String(unit.value).padStart(2, "0")}
-                        </span>
-                      </div>
-                      <div className="absolute left-0 right-0 top-1/2 -translate-y-px h-[2px] bg-background/80 z-10" />
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-2.5 bg-background rounded-r-full z-10" />
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-2.5 bg-background rounded-l-full z-10" />
+                      {i < units.length - 1 && (
+                        <span className="text-text-dim text-sm md:text-lg font-bold -mt-3">:</span>
+                      )}
                     </div>
-                    <span className="text-text-dim text-[10px] md:text-xs font-mono tracking-wider mt-1.5">
-                      {unit.label}
-                    </span>
-                  </div>
-                  {/* Separator colon */}
-                  {i < units.length - 1 && (
-                    <span className="text-text-dim text-lg md:text-2xl font-bold -mt-4">:</span>
-                  )}
-                </div>
-              ))}
-            </motion.div>
+                  ))}
+                </motion.div>
 
-            {/* Telegram button */}
-            <motion.a
-              href="#"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
-            >
-              <Send className="w-4 h-4" />
-              Get notification on Telegram
-            </motion.a>
+                {/* CTA */}
+                <motion.a
+                  href="#"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  Get notified on Telegram
+                </motion.a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
