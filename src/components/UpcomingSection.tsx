@@ -39,27 +39,35 @@ const UpcomingSection = () => {
   const ticks = Array.from({ length: 60 }, (_, i) => i);
 
   return (
-    <section className="relative py-8 md:py-14">
+    <section className="relative py-6 md:py-10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
 
-        {/* Circular orbit container */}
+        {/* Circular orbit container — scaled down */}
         <div className="flex justify-center">
-          <div className="relative">
+          <div className="relative scale-[0.72] md:scale-[0.8] origin-center">
 
-            {/* "UPCOMING" curved text — top half arc only */}
+            {/* "UPCOMING" curved along top arc — matching section label style */}
             <svg
               viewBox="0 0 360 360"
-              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] pointer-events-none"
+              className="absolute w-[360px] h-[360px] pointer-events-none z-20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 20,180 A 160,160 0 0,1 340,180" />
+                <path id="upcomingArc" d="M 28,180 A 152,152 0 0,1 332,180" />
               </defs>
-              <text fill="hsl(var(--text-dim))" fontSize="14" fontFamily="monospace" letterSpacing="12" opacity="0.7">
-                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle">
+              <text
+                fontSize="10"
+                fontFamily="'Space Grotesk', monospace"
+                letterSpacing="6"
+                textRendering="optimizeLegibility"
+              >
+                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--text-dim))">
                   UPCOMING
                 </textPath>
               </text>
+              {/* Small decorative lines on both ends of the arc */}
+              <line x1="45" y1="175" x2="120" y2="175" stroke="hsl(var(--border) / 0.3)" strokeWidth="1" />
+              <line x1="240" y1="175" x2="315" y2="175" stroke="hsl(var(--border) / 0.3)" strokeWidth="1" />
             </svg>
 
             {/* Outer rotating ring with ticks */}
