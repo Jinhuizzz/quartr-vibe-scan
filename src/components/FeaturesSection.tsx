@@ -102,6 +102,112 @@ const MiraChatMockup = () => (
   </div>
 );
 
+/* ---------- Agent Section (01) ---------- */
+import React from "react";
+
+const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features[0]; inView: boolean }>(
+  ({ feature, inView }, ref) => {
+    const [activeTab, setActiveTab] = useState(0);
+    const [inputValue, setInputValue] = useState("");
+
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
+      >
+        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
+          {/* Top: text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-10"
+          >
+            <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
+            <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-4">
+              {feature.title}
+            </h3>
+            <p className="text-text-secondary text-base leading-relaxed max-w-2xl">
+              {feature.description}
+            </p>
+          </motion.div>
+
+          {/* Tab slider */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-6"
+          >
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+              {agentTabs.map((tab, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActiveTab(i); setInputValue(""); }}
+                  className={`relative whitespace-nowrap px-4 py-2 text-sm rounded-full border transition-all duration-300 shrink-0 ${
+                    activeTab === i
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-transparent text-text-secondary border-border/50 hover:border-text-dim"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Chat input area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="surface-card p-4 rounded-xl"
+              >
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder={agentTabs[activeTab].placeholder}
+                    className="flex-1 bg-transparent text-foreground text-sm placeholder:text-text-dim outline-none"
+                  />
+                  <button className="shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-primary/80 transition-colors">
+                    <Send size={14} className="text-primary-foreground" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+
+          {/* CTA Button at bottom */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex justify-center mt-10"
+          >
+            <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
+              Build your Agent Team
+            </a>
+          </motion.div>
+        </div>
+      </motion.div>
+    );
+  }
+);
+AgentSection.displayName = "AgentSection";
+
 const FeaturesSection = () => {
   return (
     <section id="features" className="relative">
