@@ -63,7 +63,7 @@ const UpcomingSection = () => {
                 fontWeight="700"
                 letterSpacing="26"
                 textRendering="optimizeLegibility"
-                dominantBaseline="ideographic"
+                dy="2"
               >
                 <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--foreground))">
                   UPCOMING
