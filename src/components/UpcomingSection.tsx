@@ -39,7 +39,7 @@ const UpcomingSection = () => {
   const ticks = Array.from({ length: 60 }, (_, i) => i);
 
   return (
-    <section className="relative py-12 md:py-20">
+    <section className="relative py-8 md:py-14">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
 
         {/* Circular orbit container */}
