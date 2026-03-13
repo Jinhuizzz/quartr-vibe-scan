@@ -286,73 +286,9 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
     );
   }
 
-  // Agent layout (01) — text left, phone mockup right
+  // Agent layout (01) — text top, swipeable tabs with chat input, button at bottom
   if (feature.visualType === "agent") {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8 }}
-        className="border-t border-border/30 group hover:bg-surface/50 transition-colors duration-500"
-      >
-        <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-28">
-          <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
-            {/* Left: text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="md:col-span-6 lg:col-span-7"
-            >
-              <span className="text-text-dim text-xs font-mono tracking-wider block mb-4">{feature.number}</span>
-              <h3 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
-                {feature.title}
-              </h3>
-              <p className="text-text-secondary text-base leading-relaxed mb-2">
-                {feature.description}
-              </p>
-              <p className="text-text-dim text-sm italic">
-                {feature.detail}
-              </p>
-              <a href="#" className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors w-fit">Build your Agent Team</a>
-            </motion.div>
-
-            {/* Right: phone image */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="md:col-span-6 lg:col-span-5 flex justify-center"
-            >
-              <div className="relative w-full max-w-[280px]">
-                <div className="absolute -inset-8 bg-primary/5 rounded-[3rem] blur-3xl pointer-events-none" />
-                {/* iPhone-style frame */}
-                <div className="relative bg-[hsl(0,0%,2%)] rounded-[2.8rem] p-[10px] border-2 border-[hsl(0,0%,22%)] shadow-[0_25px_70px_-15px_hsl(215,60%,55%,0.15)]">
-                  {/* Side buttons - left */}
-                  <div className="absolute left-[-3px] top-[100px] w-[3px] h-[28px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
-                  <div className="absolute left-[-3px] top-[142px] w-[3px] h-[48px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
-                  <div className="absolute left-[-3px] top-[200px] w-[3px] h-[48px] bg-[hsl(0,0%,20%)] rounded-l-sm" />
-                  {/* Side button - right */}
-                  <div className="absolute right-[-3px] top-[155px] w-[3px] h-[60px] bg-[hsl(0,0%,20%)] rounded-r-sm" />
-                  {/* Dynamic Island - smaller to avoid text overlap */}
-                  <div className="absolute top-[18px] left-1/2 -translate-x-1/2 w-[80px] h-[24px] bg-[hsl(0,0%,0%)] rounded-full z-10" />
-                  {/* Screen */}
-                  <div className="relative rounded-[2.2rem] overflow-hidden bg-[hsl(0,0%,0%)]">
-                    <div className="h-[28px] bg-[hsl(0,0%,0%)]" />
-                    <div className="relative">
-                      <img src={agentChatDemo} alt="Agent chat interaction demo" className="w-full h-auto block brightness-[0.7]" />
-                    </div>
-                  </div>
-                  {/* Home indicator */}
-                  <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-[90px] h-[4px] bg-[hsl(0,0%,35%)] rounded-full" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-    );
+    return <AgentSection feature={feature} ref={ref} inView={inView} />;
   }
 
   return (
