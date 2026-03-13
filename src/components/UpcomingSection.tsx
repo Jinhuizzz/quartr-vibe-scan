@@ -107,7 +107,7 @@ const UpcomingSection = () => {
 
             {/* Inner glowing ring */}
             <div
-              className="absolute w-[280px] h-[280px] rounded-full"
+              className="absolute w-[230px] h-[230px] rounded-full"
               style={{
                 left: '50%',
                 top: '50%',
@@ -116,7 +116,7 @@ const UpcomingSection = () => {
               }}
             />
             <div
-              className="absolute w-[280px] h-[280px] rounded-full border border-primary/20"
+              className="absolute w-[230px] h-[230px] rounded-full border border-primary/20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
@@ -124,7 +124,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[280px] h-[280px]"
+              className="absolute w-[230px] h-[230px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_4px_hsl(var(--primary)/0.5)]" />
