@@ -153,7 +153,7 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
                   onClick={() => { setActiveTab(i); setInputValue(""); }}
                   className={`relative whitespace-nowrap px-4 py-2 text-sm rounded-full border transition-all duration-300 shrink-0 ${
                     activeTab === i
-                      ? "bg-foreground text-background border-foreground"
+                      ? "bg-primary text-primary-foreground border-primary"
                       : "bg-transparent text-text-secondary border-border/50 hover:border-text-dim"
                   }`}
                 >
@@ -176,16 +176,16 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="surface-card p-5 rounded-xl"
+                className="surface-card p-6 rounded-2xl min-h-[140px] flex flex-col justify-between"
               >
-                <div className="flex items-center gap-3">
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder={agentTabs[activeTab].placeholder}
-                    className="flex-1 bg-transparent text-foreground text-base placeholder:text-text-dim outline-none py-2"
-                  />
+                <textarea
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder={agentTabs[activeTab].placeholder}
+                  className="flex-1 bg-transparent text-foreground text-base placeholder:text-text-dim outline-none resize-none mb-4"
+                  rows={3}
+                />
+                <div className="flex justify-end">
                   <button className="shrink-0 px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/80 transition-colors">
                     Start
                   </button>
