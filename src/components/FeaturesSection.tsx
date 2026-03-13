@@ -187,6 +187,18 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               </motion.div>
             </div>
           </div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex justify-center mt-10"
+          >
+            <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
+              What's the trade? ASK MIRA.
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     );
