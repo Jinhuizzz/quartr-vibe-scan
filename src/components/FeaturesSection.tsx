@@ -48,9 +48,7 @@ const MiraChatMockup = () => (
       {/* Avatar row */}
       <div className="flex items-center gap-2 mb-3">
         <div className="w-6 h-6 rounded-md bg-primary/20 flex items-center justify-center">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-            <path d="M2 12h4l3-9 6 18 3-9h4" />
-          </svg>
+          <Bot size={14} className="text-primary" />
         </div>
         <span className="text-foreground text-xs font-semibold">Mira</span>
         <span className="text-text-dim text-[10px]">16:33</span>
