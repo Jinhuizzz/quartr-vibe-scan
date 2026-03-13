@@ -1,11 +1,29 @@
-import { motion, useInView } from "framer-motion";
-import { Bot } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Bot, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import miraBarChart from "@/assets/mira-bar-chart.png";
 import miraSandbox from "@/assets/mira-sandbox-process.png";
 import watchwiseResearch from "@/assets/watchwise-research.png";
-import agentChatDemo from "@/assets/agent-chat-demo.jpg";
+
+const agentTabs = [
+  {
+    label: "播客整理成投资报告",
+    placeholder: "粘贴播客链接，Agent 帮你整理成投资报告...",
+  },
+  {
+    label: "分析师评级变动追踪",
+    placeholder: "输入股票代码，追踪分析师评级变动...",
+  },
+  {
+    label: "定时任务推送",
+    placeholder: "设定你的推送规则，如"每天早8点推送科技股异动"...",
+  },
+  {
+    label: "和其他 Agent 聊天",
+    placeholder: "向其他人的 Agent 发起对话...",
+  },
+];
 
 const features = [
   {
