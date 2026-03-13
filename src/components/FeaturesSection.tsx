@@ -17,7 +17,7 @@ const agentTabs = [
   },
   {
     label: "定时任务推送",
-    placeholder: "设定你的推送规则，如"每天早8点推送科技股异动"...",
+    placeholder: "设定你的推送规则，如 每天早8点推送科技股异动...",
   },
   {
     label: "和其他 Agent 聊天",
