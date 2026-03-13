@@ -153,7 +153,7 @@ const AgentSection = React.forwardRef<HTMLDivElement, { feature: typeof features
                   onClick={() => { setActiveTab(i); setInputValue(""); }}
                   className={`relative whitespace-nowrap px-4 py-2 text-sm rounded-full border transition-all duration-300 shrink-0 ${
                     activeTab === i
-                      ? "bg-primary text-primary-foreground border-primary"
+                      ? "bg-surface-elevated text-foreground border-border/50"
                       : "bg-transparent text-text-secondary border-border/50 hover:border-text-dim"
                   }`}
                 >
