@@ -9,19 +9,19 @@ import watchwiseResearch from "@/assets/watchwise-research.png";
 const agentTabs = [
   {
     label: "播客整理成投资报告",
-    placeholder: "粘贴播客链接，Agent 帮你整理成投资报告...",
+    placeholder: "Paste a podcast link, your Agent turns it into an investment report...",
   },
   {
     label: "分析师评级变动追踪",
-    placeholder: "输入股票代码，追踪分析师评级变动...",
+    placeholder: "Enter a ticker to track analyst rating changes...",
   },
   {
     label: "定时任务推送",
-    placeholder: "设定你的推送规则，如 每天早8点推送科技股异动...",
+    placeholder: "Set your push rules, e.g. 'Push tech stock movers every morning at 8am'...",
   },
   {
     label: "和其他 Agent 聊天",
-    placeholder: "向其他人的 Agent 发起对话...",
+    placeholder: "Start a conversation with someone else's Agent...",
   },
 ];
 
