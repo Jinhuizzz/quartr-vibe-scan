@@ -1,4 +1,5 @@
 import { motion, useInView } from "framer-motion";
+import { Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import miraBarChart from "@/assets/mira-bar-chart.png";
@@ -48,9 +49,7 @@ const MiraChatMockup = () => (
       {/* Avatar row */}
       <div className="flex items-center gap-2 mb-3">
         <div className="w-6 h-6 rounded-md bg-primary/20 flex items-center justify-center">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
-            <path d="M2 12h4l3-9 6 18 3-9h4" />
-          </svg>
+          <Bot size={14} className="text-primary" />
         </div>
         <span className="text-foreground text-xs font-semibold">Mira</span>
         <span className="text-text-dim text-[10px]">16:33</span>
@@ -188,6 +187,18 @@ const FeatureRow = ({ feature, index }: { feature: typeof features[0]; index: nu
               </motion.div>
             </div>
           </div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex justify-center mt-10"
+          >
+            <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors">
+              What's the trade? ASK MIRA.
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     );
