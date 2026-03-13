@@ -41,19 +41,32 @@ const UpcomingSection = () => {
   return (
     <section className="relative py-12 md:py-20">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex items-center gap-4 mb-10">
-          <span className="text-text-dim text-xs uppercase tracking-[0.3em] font-mono">Upcoming</span>
-          <div className="flex-1 h-px bg-border/30" />
-        </div>
 
         {/* Circular orbit container */}
         <div className="flex justify-center">
           <div className="relative">
+
+            {/* "UPCOMING" text curved along the outer ring — static */}
+            <svg
+              viewBox="0 0 440 440"
+              className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px] pointer-events-none"
+              style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+            >
+              <defs>
+                <path id="upcomingArc" d="M 220,220 m -195,0 a 195,195 0 1,1 390,0 a 195,195 0 1,1 -390,0" />
+              </defs>
+              <text fill="hsl(var(--text-dim))" fontSize="11" fontFamily="monospace" letterSpacing="8" opacity="0.5">
+                <textPath href="#upcomingArc" startOffset="12%">
+                  UPCOMING · UPCOMING · UPCOMING · UPCOMING ·
+                </textPath>
+              </text>
+            </svg>
+
             {/* Outer rotating ring with ticks */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 m-auto w-[340px] h-[340px] md:w-[440px] md:h-[440px]"
+              className="absolute w-[340px] h-[340px] md:w-[440px] md:h-[440px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <svg viewBox="0 0 440 440" className="w-full h-full">
