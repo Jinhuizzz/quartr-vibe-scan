@@ -104,7 +104,7 @@ const UpcomingSection = () => {
 
             {/* Inner glowing ring */}
             <div
-              className="absolute w-[270px] h-[270px] rounded-full"
+              className="absolute w-[330px] h-[330px] rounded-full"
               style={{
                 left: '50%',
                 top: '50%',
