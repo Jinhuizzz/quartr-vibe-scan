@@ -59,7 +59,7 @@ const UpcomingSection = () => {
                 fontSize="28"
                 fontFamily="'Space Grotesk', sans-serif"
                 fontWeight="700"
-                letterSpacing="8"
+                letterSpacing="18"
                 textRendering="optimizeLegibility"
               >
                 <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--foreground))">
