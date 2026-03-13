@@ -23,6 +23,14 @@ const agentTabs = [
     label: "Chat with Agents",
     placeholder: "Start a conversation with someone else's Agent...",
   },
+  {
+    label: "Industry Research",
+    placeholder: "Ask your Agent to deep-dive into any sector or industry...",
+  },
+  {
+    label: "Sentiment Monitor",
+    placeholder: "e.g. 'Monitor Elon Musk and Trump's posts on X for market signals'...",
+  },
 ];
 
 const features = [
