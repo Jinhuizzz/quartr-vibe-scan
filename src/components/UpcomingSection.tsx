@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Send } from "lucide-react";
 import alibabaLogo from "@/assets/alibaba-logo.png";
 
 const BABA_EARNINGS_DATE = new Date("2026-03-19T06:00:00-04:00");
