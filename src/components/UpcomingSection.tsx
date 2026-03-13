@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Send } from "lucide-react";
 import alibabaLogo from "@/assets/alibaba-logo.png";
 
 const BABA_EARNINGS_DATE = new Date("2026-03-19T06:00:00-04:00");
@@ -102,6 +103,7 @@ const UpcomingSection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
             >
+              <Send className="w-4 h-4" />
               Get notification on Telegram
             </motion.a>
           </div>
