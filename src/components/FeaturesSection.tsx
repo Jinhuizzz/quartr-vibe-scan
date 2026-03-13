@@ -1,4 +1,5 @@
 import { motion, useInView } from "framer-motion";
+import { Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import miraBarChart from "@/assets/mira-bar-chart.png";
