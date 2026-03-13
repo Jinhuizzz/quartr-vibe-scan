@@ -55,7 +55,7 @@ const UpcomingSection = () => {
             >
               <defs>
                 {/* Arc radius 225, just outside the tick ring (r=216), centered at 220,220 */}
-                <path id="upcomingArc" d="M 220,220 m -225,0 a 225,225 0 0,1 450,0" />
+                <path id="upcomingArc" d="M 220,220 m -218,0 a 218,218 0 0,1 436,0" />
               </defs>
               <text
                 fontSize="26"
