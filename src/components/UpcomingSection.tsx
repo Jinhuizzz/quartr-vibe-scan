@@ -163,7 +163,7 @@ const UpcomingSection = () => {
                   {units.map((unit, i) => (
                     <div key={unit.label} className="flex items-center gap-1.5 md:gap-2">
                       <div className="flex flex-col items-center">
-                        <div className="relative w-11 h-13 md:w-14 md:h-16 rounded-md overflow-hidden">
+                        <div className="relative w-14 h-16 rounded-md overflow-hidden">
                           <div className="absolute inset-0 bottom-1/2 bg-surface-elevated border border-border/40 rounded-t-md flex items-end justify-center">
                             <span className="font-display text-base md:text-xl font-bold text-foreground translate-y-1/2">
                               {String(unit.value).padStart(2, "0")}
