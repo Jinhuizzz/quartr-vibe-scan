@@ -165,7 +165,7 @@ const UpcomingSection = () => {
                       <div className="flex flex-col items-center">
                         <div className="relative w-14 h-16 rounded-md overflow-hidden">
                           <div className="absolute inset-0 bottom-1/2 bg-surface-elevated border border-border/40 rounded-t-md flex items-end justify-center">
-                            <span className="font-display text-base md:text-xl font-bold text-foreground translate-y-1/2">
+                            <span className="font-display text-xl font-bold text-foreground translate-y-1/2">
                               {String(unit.value).padStart(2, "0")}
                             </span>
                           </div>
