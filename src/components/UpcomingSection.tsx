@@ -195,10 +195,9 @@ const UpcomingSection = () => {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                  className="inline-flex items-center px-4 py-2 text-xs font-medium rounded-full bg-foreground text-background hover:bg-foreground/90 transition-colors"
                 >
-                  <Send className="w-3.5 h-3.5" />
-                  Get notified on Telegram
+                  Get notified on APP
                 </motion.a>
               </div>
             </div>
