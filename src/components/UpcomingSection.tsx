@@ -39,34 +39,42 @@ const UpcomingSection = () => {
   const ticks = Array.from({ length: 60 }, (_, i) => i);
 
   return (
-    <section className="relative py-8 md:py-14">
+    <section className="relative py-6 md:py-10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20">
 
-        {/* Circular orbit container */}
+        {/* Circular orbit container — scaled down */}
         <div className="flex justify-center">
-          <div className="relative">
+          <div className="relative scale-[0.72] md:scale-[0.8] origin-center">
 
-            {/* "UPCOMING" curved text — top half arc only */}
+            {/* "UPCOMING" curved along top arc — matching section label style */}
             <svg
               viewBox="0 0 360 360"
-              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] pointer-events-none"
+              className="absolute w-[360px] h-[360px] pointer-events-none z-20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <defs>
-                <path id="upcomingArc" d="M 20,180 A 160,160 0 0,1 340,180" />
+                <path id="upcomingArc" d="M 28,180 A 152,152 0 0,1 332,180" />
               </defs>
-              <text fill="hsl(var(--text-dim))" fontSize="14" fontFamily="monospace" letterSpacing="12" opacity="0.7">
-                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle">
+              <text
+                fontSize="10"
+                fontFamily="'Space Grotesk', monospace"
+                letterSpacing="6"
+                textRendering="optimizeLegibility"
+              >
+                <textPath href="#upcomingArc" startOffset="50%" textAnchor="middle" fill="hsl(var(--text-dim))">
                   UPCOMING
                 </textPath>
               </text>
+              {/* Small decorative lines on both ends of the arc */}
+              <line x1="45" y1="175" x2="120" y2="175" stroke="hsl(var(--border) / 0.3)" strokeWidth="1" />
+              <line x1="240" y1="175" x2="315" y2="175" stroke="hsl(var(--border) / 0.3)" strokeWidth="1" />
             </svg>
 
             {/* Outer rotating ring with ticks */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px]"
+              className="absolute w-[360px] h-[360px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <svg viewBox="0 0 360 360" className="w-full h-full">
@@ -92,13 +100,13 @@ const UpcomingSection = () => {
 
             {/* Middle static ring - dashed circle */}
             <div
-              className="absolute w-[240px] h-[240px] md:w-[310px] md:h-[310px] rounded-full border border-dashed border-border/30"
+              className="absolute w-[310px] h-[310px] rounded-full border border-dashed border-border/30"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
             {/* Inner glowing ring */}
             <div
-              className="absolute w-[200px] h-[200px] md:w-[270px] md:h-[270px] rounded-full"
+              className="absolute w-[270px] h-[270px] rounded-full"
               style={{
                 left: '50%',
                 top: '50%',
@@ -107,7 +115,7 @@ const UpcomingSection = () => {
               }}
             />
             <div
-              className="absolute w-[200px] h-[200px] md:w-[270px] md:h-[270px] rounded-full border border-primary/20"
+              className="absolute w-[270px] h-[270px] rounded-full border border-primary/20"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
@@ -115,7 +123,7 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[200px] h-[200px] md:w-[270px] md:h-[270px]"
+              className="absolute w-[270px] h-[270px]"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_4px_hsl(var(--primary)/0.5)]" />
@@ -125,12 +133,12 @@ const UpcomingSection = () => {
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.25, 0.15] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[160px] h-[160px] md:w-[210px] md:h-[210px] rounded-full bg-primary/10 blur-xl"
+              className="absolute w-[210px] h-[210px] rounded-full bg-primary/10 blur-xl"
               style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
             />
 
             {/* Center content */}
-            <div className="relative w-[280px] h-[280px] md:w-[360px] md:h-[360px] flex items-center justify-center">
+            <div className="relative w-[360px] h-[360px] flex items-center justify-center">
               <div className="flex flex-col items-center text-center z-10">
                 {/* Logo + title */}
                 <motion.div
@@ -155,14 +163,14 @@ const UpcomingSection = () => {
                   {units.map((unit, i) => (
                     <div key={unit.label} className="flex items-center gap-1.5 md:gap-2">
                       <div className="flex flex-col items-center">
-                        <div className="relative w-11 h-13 md:w-14 md:h-16 rounded-md overflow-hidden">
+                        <div className="relative w-14 h-16 rounded-md overflow-hidden">
                           <div className="absolute inset-0 bottom-1/2 bg-surface-elevated border border-border/40 rounded-t-md flex items-end justify-center">
-                            <span className="font-display text-base md:text-xl font-bold text-foreground translate-y-1/2">
+                            <span className="font-display text-xl font-bold text-foreground translate-y-1/2">
                               {String(unit.value).padStart(2, "0")}
                             </span>
                           </div>
                           <div className="absolute inset-0 top-1/2 bg-surface border border-border/30 border-t-0 rounded-b-md flex items-start justify-center overflow-hidden">
-                            <span className="font-display text-base md:text-xl font-bold text-foreground -translate-y-1/2">
+                            <span className="font-display text-xl font-bold text-foreground -translate-y-1/2">
                               {String(unit.value).padStart(2, "0")}
                             </span>
                           </div>
